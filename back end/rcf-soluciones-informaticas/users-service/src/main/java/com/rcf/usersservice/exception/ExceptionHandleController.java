@@ -1,5 +1,6 @@
 package com.rcf.usersservice.exception;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @ControllerAdvice
+@Hidden
 public class ExceptionHandleController {
     @ExceptionHandler(ResourceNotFound.class)
     public ResponseEntity<?> resourceNotFoundException(ResourceNotFound e) {

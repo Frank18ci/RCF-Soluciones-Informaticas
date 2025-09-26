@@ -3,9 +3,9 @@ package com.rcf.usersservice.dto;
 import lombok.Builder;
 
 @Builder
-public record CityResponse(
+public record RolResponse(
         Long id,
-        String name,
-        StateRegionResponse stateRegion
+        String code,
+        String name
 ) {
 }

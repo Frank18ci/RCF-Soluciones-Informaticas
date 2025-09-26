@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +23,8 @@ public class City {
     @ManyToOne
     @JoinColumn(name = "state_region_id", nullable = false)
     private StateRegion stateRegion;
+
+    @OneToMany(mappedBy = "city")
+    private List<UserAddress> userAddresses;
+
 }

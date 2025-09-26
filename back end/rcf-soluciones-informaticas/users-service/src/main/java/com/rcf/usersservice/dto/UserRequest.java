@@ -1,0 +1,22 @@
+package com.rcf.usersservice.dto;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+
+@Builder
+public record UserRequest(
+        @Email(message = "email debe tener un formato valido")
+        @NotBlank(message = "email no puede estar vacio")
+        String email,
+        @NotBlank(message = "password no puede estar vacio")
+        String password,
+        @NotBlank(message = "fullName no puede estar vacio")
+        String fullName,
+        @NotNull(message = "roleId no puede ser nulo")
+        Long roleId,
+        @NotBlank(message = "phone no puede estar vacio")
+        String phone
+) {
+}

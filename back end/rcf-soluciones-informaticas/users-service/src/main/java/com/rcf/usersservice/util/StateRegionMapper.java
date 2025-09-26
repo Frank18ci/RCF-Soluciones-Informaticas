@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CountryMapper.class})
 public interface StateRegionMapper {
     @Mapping(source = "countryId", target = "country.id")
     StateRegion toEntity(StateRegionRequest stateRegionRequest);
