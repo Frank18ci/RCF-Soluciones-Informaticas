@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: services-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/RCF_SOLUCIONES_INFORMATICAS_SERVICES_SERVICE?useSSL=false&allowPublicKeyRetrieval=true&serverTimeZone=UTC&autoReconnect=true
+    username: root
+    password: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+server:
+  port: 8088
