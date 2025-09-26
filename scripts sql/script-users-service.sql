@@ -35,8 +35,9 @@ VALUES
 ('admin@example.com', 'hashed_pass_789', 'Admin Root', 3, NULL); -- Admin
 
 CREATE TABLE countries (
-  code CHAR(2) PRIMARY KEY,
-  name VARCHAR(100) NOT NULL
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  code CHAR(2) NOT NULL UNIQUE,
+  name VARCHAR(100) NOT NULL UNIQUE
 );
 
 INSERT INTO countries (code, name) VALUES
@@ -46,15 +47,15 @@ INSERT INTO countries (code, name) VALUES
 CREATE TABLE states_regions (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
-  country_code CHAR(2) NOT NULL,
-  CONSTRAINT fk_states_regions_country FOREIGN KEY (country_code) REFERENCES countries(code)
+  country_id BIGINT NOT NULL,
+  CONSTRAINT fk_states_regions_country FOREIGN KEY (country_id) REFERENCES countries(id)
 );
 
-INSERT INTO states_regions (name, country_code) VALUES
-('Lima', 'PE'),
-('Cusco', 'PE'),
-('California', 'US'),
-('New York', 'US');
+INSERT INTO states_regions (name, country_id) VALUES
+('Lima', 1),
+('Cusco', 1),
+('California', 2),
+('New York', 2);
 
 CREATE TABLE cities (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -93,3 +94,4 @@ VALUES
 (1, 'Calle Los Pinos 567', 'Frente a la bodega Azul', 1, '15073'),
 (2, 'Jr. Saphy 345', 'A espaldas de la Plaza de Armas', 3, '08002'),
 (3, '123 Main St', 'Near Central Park', 6, '10001');
+
