@@ -1,13 +1,12 @@
 package com.rcf.usersservice.repository;
 
-import com.rcf.usersservice.model.Rol;
+import com.rcf.usersservice.model.UserAddress;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface RolRepository extends JpaRepository<Rol, Long> {
-    Optional<Rol> findByCode(String code);
-    Optional<Rol> findByName(String name);
+public interface UserAddressRepository extends JpaRepository<UserAddress, Long> {
+    Optional<UserAddress> findByUserId(Long userId);
 }
