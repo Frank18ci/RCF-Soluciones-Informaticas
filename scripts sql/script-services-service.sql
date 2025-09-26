@@ -7,7 +7,7 @@ use RCF_SOLUCIONES_INFORMATICAS_SERVICES_SERVICE;
 CREATE TABLE services (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   code VARCHAR(80) NOT NULL UNIQUE,
-  name VARCHAR(150) NOT NULL UNIQUE,
+  name VARCHAR(150) NOT NULL,
   description TEXT NULL,
   base_price_cents BIGINT NOT NULL,         -- precio base en centavos
   tax_rate DECIMAL(5,2) NOT NULL DEFAULT 0, -- impuesto
