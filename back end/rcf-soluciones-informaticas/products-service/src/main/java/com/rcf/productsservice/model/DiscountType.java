@@ -6,21 +6,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "product_attributes ")
-public class ProductAttributes {
+@Table(name = "discounts_types")
+public class DiscountType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100, nullable = false, unique = true)
-    private String code;
-
-    @Column(length = 150, nullable = false)
+    @Column(length = 50, nullable = false, unique = true)
     private String name;
 
+    @OneToMany(mappedBy = "discountType")
+    private List<Discount> discounts;
 }

@@ -17,21 +17,21 @@ import lombok.NoArgsConstructor;
                 @UniqueConstraint(name = "uq_prod_attr", columnNames = {"product_id", "attribute_id"})
         }
 )
-public class ProductAttributeValues {
+public class ProductAttributeValue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String value;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false,
+    @JoinColumn(nullable = false,
             foreignKey = @ForeignKey(name = "fk_pav_product"))
-    private Products product;
+    private Product product;
 
     @ManyToOne
     @JoinColumn(name = "attribute_id", nullable = false,
             foreignKey = @ForeignKey(name = "fk_pav_attribute"))
-    private ProductAttributes attribute;
+    private ProductAttribute productAttribute;
 }

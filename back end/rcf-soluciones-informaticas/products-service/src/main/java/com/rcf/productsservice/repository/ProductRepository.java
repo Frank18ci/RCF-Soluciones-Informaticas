@@ -1,4 +1,4 @@
 package com.rcf.productsservice.repository;
 
-public interface ProductsRepository {
+public interface ProductRepository {
 }

@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "discounts")
-public class Discounts {
+public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,22 +28,24 @@ public class Discounts {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "discount_type_id", nullable = false)
-    private DiscountsTypes discountType;
+    @JoinColumn(nullable = false)
+    private DiscountType discountType;
 
     @Column(nullable = false, precision = 15, scale = 2)
-    private Double value;
+    private BigDecimal value;
 
     @Column(nullable = false)
     private Boolean active = true;
-
+    @Column(columnDefinition = "DATETIME")
     private LocalDateTime startDate;
-
+    @Column(columnDefinition = "DATETIME")
     private LocalDateTime endDate;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime createdAt;
+    @Column(nullable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private LocalDateTime updatedAt;
 
-    @Column(nullable = false)
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    @OneToMany(mappedBy = "discount")
+    private List<Product> products;
 }

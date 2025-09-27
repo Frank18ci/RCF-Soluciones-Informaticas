@@ -1,4 +1,4 @@
 package com.rcf.productsservice.repository;
 
-public interface DiscountsTypesRepository {
+public interface ProductAttributeRepository {
 }
