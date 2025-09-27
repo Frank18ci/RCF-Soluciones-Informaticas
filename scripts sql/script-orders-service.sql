@@ -4,7 +4,7 @@ CREATE DATABASE RCF_SOLUCIONES_INFORMATICAS_ORDERS_SERVICE;
 use RCF_SOLUCIONES_INFORMATICAS_ORDERS_SERVICE;
 
 CREATE TABLE order_statuses (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
   code VARCHAR(20) NOT NULL UNIQUE,   -- 'PENDING','PAID','CANCELLED','COMPLETED'
   sort_order INT NOT NULL
 );
@@ -21,7 +21,7 @@ CREATE TABLE orders (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   user_id BIGINT NOT NULL,               -- referencia lógica a usuario
   currency_code CHAR(3) NOT NULL,
-  status_id INT NOT NULL,                -- FK a order_statuses
+  status_id BIGINT NOT NULL,                -- FK a order_statuses
   payment_method_code VARCHAR(40) NULL,
   subtotal_cents BIGINT NOT NULL DEFAULT 0,
   tax_total_cents BIGINT NOT NULL DEFAULT 0,
