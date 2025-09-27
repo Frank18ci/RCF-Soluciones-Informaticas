@@ -15,29 +15,28 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "categories")
-public class Categories {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     // Relación recursiva con la misma tabla (self-referencing)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(name = "fk_categories_parent"))
-    private Categories parent;
-
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_categories_parent"))
+    private Category parent;
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Categories> children;
-
+    private List<Category> children;
     @Column(length = 120, nullable = false, unique = true)
     private String name;
-
     @Column(length = 140, nullable = false, unique = true)
     private String slug;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", nullable = false)
+    @Column(nullable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updatedAt;
-
+    
+    @OneToMany(mappedBy = "parent")
+    private List<Category> subcategories;
+    
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 }
