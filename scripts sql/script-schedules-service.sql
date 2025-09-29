@@ -5,7 +5,7 @@ use RCF_SOLUCIONES_INFORMATICAS_SCHEDULES_SERVICE;
 
 -- Estados de reservas
 CREATE TABLE booking_statuses (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id bigint AUTO_INCREMENT PRIMARY KEY,
   code VARCHAR(20) NOT NULL UNIQUE,       -- 'SCHEDULED','ASSIGNED','IN_PROGRESS','COMPLETED','CANCELLED'
   sort_order INT NOT NULL
 );
@@ -26,7 +26,7 @@ CREATE TABLE service_bookings (
   service_id BIGINT NOT NULL,              -- referencia lógica a service
   product_id BIGINT NULL,                  -- si aplica
   technician_user_id BIGINT NULL,          -- técnico asignado
-  status_id INT NOT NULL,                  -- FK a booking_statuses
+  status_id bigint NOT NULL,                  -- FK a booking_statuses
   scheduled_start DATETIME NOT NULL,
   scheduled_end DATETIME NOT NULL,
   address_snapshot VARCHAR(250) NULL,      -- snapshot de dirección
