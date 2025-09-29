@@ -26,7 +26,7 @@ public class ProductAttributeValueController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productAttributeValueService.createProductAttributeValue(productAttributeValueRequest));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateProductAttributeValue(Long id, @RequestBody @Valid ProductAttributeValueRequest productAttributeValueRequest) {
+    public ResponseEntity<?> updateProductAttributeValue(@PathVariable Long id, @RequestBody @Valid ProductAttributeValueRequest productAttributeValueRequest) {
         return ResponseEntity.ok(productAttributeValueService.updateProductAttributeValue(id,productAttributeValueRequest));
     }
     @DeleteMapping("/{id}")
