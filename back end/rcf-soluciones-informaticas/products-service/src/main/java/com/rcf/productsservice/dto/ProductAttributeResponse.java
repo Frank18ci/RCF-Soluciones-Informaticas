@@ -1,11 +1,11 @@
 package com.rcf.productsservice.dto;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 @Builder
-public record DiscountTypeResponse(
+public record ProductAttributeResponse(
         Long id,
+        String code,
         String name
 ) {
 }

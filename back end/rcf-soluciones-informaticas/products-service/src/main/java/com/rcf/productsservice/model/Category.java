@@ -36,7 +36,6 @@ public class Category {
     
     @OneToMany(mappedBy = "parent")
     private List<Category> subcategories;
-    
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 }

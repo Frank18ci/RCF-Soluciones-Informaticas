@@ -1,4 +1,8 @@
 package com.rcf.productsservice.repository;
 
-public interface ProductAttributeRepository {
+import com.rcf.productsservice.model.ProductAttribute;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductAttributeRepository extends JpaRepository <ProductAttribute,Long> {
+
 }
