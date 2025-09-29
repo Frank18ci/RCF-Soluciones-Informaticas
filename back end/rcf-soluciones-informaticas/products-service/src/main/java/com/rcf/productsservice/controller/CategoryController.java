@@ -23,7 +23,7 @@ public class CategoryController {
         return ResponseEntity.ok(categorySrevice.getCategoryById(id));
     }
     @PostMapping
-    public ResponseEntity<?> createCategory(@RequestBody com.rcf.productsservice.dto.CategoryRequest categoryRequest) {
+    public ResponseEntity<?> createCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categorySrevice.createCategory(categoryRequest));
     }
     @PutMapping("/{id}")
