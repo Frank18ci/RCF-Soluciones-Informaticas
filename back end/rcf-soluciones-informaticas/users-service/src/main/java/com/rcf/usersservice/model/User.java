@@ -29,11 +29,11 @@ public class User {
     private Rol role;
     @Column(length = 30)
     private String phone;
-    @Column(nullable = false, columnDefinition = "boolean default true", name = "is_active")
+    @Column(nullable = false, columnDefinition = "boolean default true", name = "is_active", insertable = false)
     private Boolean active = true;
-    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP", insertable = false)
     private LocalDateTime createdAt;
-    @Column(nullable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(nullable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", insertable = false)
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 }

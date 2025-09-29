@@ -31,7 +31,7 @@ public record ProductRequest(
         BigDecimal taxRate,
         @NotNull(message = "stock no pude ser nulo")
         @Positive (message = "stock debe ser un valor positivo")
-        Long stock,
+        Integer stock,
         @NotNull(message = "category no pude ser nulo")
         Long categoryId,
         @NotNull(message = "discount no pude ser nulo")
