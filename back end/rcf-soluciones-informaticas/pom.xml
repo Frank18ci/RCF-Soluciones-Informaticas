@@ -17,6 +17,7 @@
         <module>services-service</module>
         <module>orders-service</module>
         <module>schedules-service</module>
+        <module>gateway-service</module>
     </modules>
 
     <properties>
