@@ -25,8 +25,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatMenuModule} from '@angular/material/menu';
 
 const materialModules = [
+  MatMenuModule,
   MatButtonModule,
   MatCardModule,
   MatToolbarModule,
