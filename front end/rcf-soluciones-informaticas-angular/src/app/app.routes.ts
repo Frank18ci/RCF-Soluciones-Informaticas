@@ -3,11 +3,11 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: 'tienda',
-        loadChildren: () => import('./tienda/tienda-routing-module').then(m => m.TiendaRoutingModule)
+        loadChildren: () => import('./tienda/tienda-module').then(m => m.TiendaModule)
     },
     {
         path: 'admin',
-        loadChildren: () => import('./admin/admin-routing-module').then(m => m.AdminRoutingModule)
+        loadChildren: () => import('./admin/admin-module').then(m => m.AdminModule)
     },
     {
         path: '**',

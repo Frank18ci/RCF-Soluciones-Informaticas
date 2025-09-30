@@ -1,0 +1,124 @@
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+    <app-topbar></app-topbar>
+    <div class="mx-auto max-w-7xl px-4">
+        <div class="flex h-16 items-center justify-between">
+            <!-- Izquierda: menú móvil + marca -->
+            <div class="flex items-center gap-3">
+                <button matButton [matMenuTriggerFor]="menu"
+                    class="md:hidden inline-flex items-center justify-center rounded-full text-slate-700 hover:bg-orange-50 active:bg-orange-100 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <a mat-menu-item routerLink="/tienda/inicio" routerLinkActive="!text-orange-700 !bg-orange-50"
+                        class="block rounded-lg px-3 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-700">Inicio</a>
+                    <a mat-menu-item routerLink="/tienda/productos" routerLinkActive="!text-orange-700 !bg-orange-50"
+                        class="block rounded-lg px-3 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-700">Productos</a>
+                    <a mat-menu-item routerLink="/admin/servicios" routerLinkActive="!text-orange-700 !bg-orange-50"
+                        class="block rounded-lg px-3 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-700">Servicios</a>
+                    <a mat-menu-item routerLink="/admin/contactenos" routerLinkActive="!text-orange-700 !bg-orange-50"
+                        class="block rounded-lg px-3 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-700">Contáctenos</a>
+                </mat-menu>
+
+                <a routerLink='/tienda/inicio' class="flex items-center gap-2 text-slate-700">
+                    <span class="hidden sm:inline font-semibold tracking-tight">RCF Soluciones Informáticas</span>
+                </a>
+            </div>
+
+            <!-- Centro: navegación (desktop) -->
+            <nav class="hidden md:flex items-center gap-1" aria-label="Navegación principal">
+                <a routerLink="/tienda/inicio" routerLinkActive="!text-orange-700 !bg-orange-50"
+                    class="inline-flex items-center rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    Inicio
+                </a>
+                <a routerLink="/tienda/productos" routerLinkActive="!text-orange-700 !bg-orange-50"
+                    class="inline-flex items-center rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    Productos
+                </a>
+                <a routerLink="/admin/servicios" routerLinkActive="!text-orange-700 !bg-orange-50"
+                    class="inline-flex items-center rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    Servicios
+                </a>
+                <a routerLink="/admin/contactenos" routerLinkActive="!text-orange-700 !bg-orange-50"
+                    class="inline-flex items-center rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    Contáctenos
+                </a>
+            </nav>
+
+            <!-- Derecha: acciones -->
+            <div class="flex items-center gap-1.5">
+                <!-- Cuenta -->
+                <a routerLink="/mi-cuenta"
+                    class="hidden sm:inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-orange-700 hover:bg-orange-50 active:bg-orange-100 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    <mat-icon>account_circle</mat-icon>
+                    <span class="hidden lg:inline">Mi cuenta</span>
+                </a>
+
+                <!-- Carrito -->
+                <button type="button"
+                    class="relative inline-flex items-center justify-center h-10 w-10 rounded-full text-slate-700 hover:bg-orange-50 active:bg-orange-100 focus-visible:outline focus-visible:outline-orange-500 transition"
+                    aria-label="Abrir carrito" (click)="toggleCart()">
+                    <mat-icon>shopping_cart</mat-icon>
+                    <span
+                        class="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 px-1 rounded-full bg-orange-600 text-white text-[11px] leading-5 text-center">
+                        {{ cartCount }}
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Búsqueda (desktop) -->
+        <div class="hidden md:block py-3">
+            <form class="relative" role="search" (submit)="onSearch($event)">
+                <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35M10 18a8 8 0 110-16 8 8 0 010 16z" />
+                    </svg>
+                </span>
+                <input name="q" [(ngModel)]="q"
+                    class="w-full h-11 rounded-full border border-slate-200 bg-white pl-10 pr-28 text-sm placeholder:text-slate-400 shadow-sm focus:ring-2 focus:ring-orange-500 outline-none focus:border-orange-500"
+                    type="search" placeholder="Buscar productos..." autocomplete="off">
+                <button type="submit"
+                    class="absolute right-1 top-1/2 -translate-y-1/2 inline-flex items-center gap-2 rounded-full bg-orange-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-orange-700 focus-visible:outline outline-none focus-visible:outline-orange-500">
+                    Buscar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Chips de categorías -->
+    <div class="border-t border-slate-200 bg-white">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="flex gap-2 overflow-x-auto py-2">
+                <button
+                    class="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 hover:border-orange-400 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    Todos
+                </button>
+                <button
+                    class="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 hover:border-orange-400 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    Intel i5
+                </button>
+                <button
+                    class="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 hover:border-orange-400 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    Intel i7
+                </button>
+                <button
+                    class="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 hover:border-orange-400 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    Dell
+                </button>
+                <button
+                    class="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 hover:border-orange-400 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    HP
+                </button>
+                <button
+                    class="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 hover:border-orange-400 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    Lenovo
+                </button>
+                <button
+                    class="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 hover:border-orange-400 hover:text-orange-700 hover:bg-orange-50 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    Ofertas
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
