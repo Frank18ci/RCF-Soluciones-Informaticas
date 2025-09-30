@@ -11,6 +11,14 @@ spring:
       ddl-auto: validate
     show-sql: true
 
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        register: true
+
 
 springdoc:
   api-docs:
@@ -19,6 +27,7 @@ springdoc:
     path: /swagger-ui.html
     operationsSorter: method
     tagsSorter: alpha
+
 
 
 server:

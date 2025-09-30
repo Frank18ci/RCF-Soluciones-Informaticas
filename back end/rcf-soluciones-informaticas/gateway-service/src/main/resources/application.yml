@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        register: true
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: users-service
+              uri: lb://users-service
+              predicates:
+                - Path=/users/**
+            - id: orders-service
+              uri: lb://orders-service
+              predicates:
+                - Path=/orders/**
+            - id: products-service
+              uri: lb://products-service
+              predicates:
+                - Path=/products/**
+            - id: schedules-service
+              uri: lb://schedules-service
+              predicates:
+                - Path=/schedules/**
+            - id: services-service
+              uri: lb://services-service
+              predicates:
+                - Path=/services/**
+server:
+  port: 8080
