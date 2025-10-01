@@ -16,21 +16,46 @@ spring:
               uri: lb://users-service
               predicates:
                 - Path=/users/**
+              filters:
+                - StripPrefix=1
             - id: orders-service
               uri: lb://orders-service
               predicates:
                 - Path=/orders/**
+              filters:
+                - StripPrefix=1
             - id: products-service
               uri: lb://products-service
               predicates:
                 - Path=/products/**
+              filters:
+                - StripPrefix=1
             - id: schedules-service
               uri: lb://schedules-service
               predicates:
                 - Path=/schedules/**
+              filters:
+                - StripPrefix=1
             - id: services-service
               uri: lb://services-service
               predicates:
                 - Path=/services/**
+              filters:
+                - StripPrefix=1
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    urls:
+      - name: usuarios
+        url: /users/api-docs
+      - name: ordenes
+        url: /orders/api-docs
+      - name: productos
+        url: /products/api-docs
+      - name: horarios
+        url: /schedules/api-docs
+      - name: servicios
+        url: /services/api-docs
 server:
   port: 8080
