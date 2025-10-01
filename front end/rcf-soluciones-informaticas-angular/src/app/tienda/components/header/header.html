@@ -4,10 +4,12 @@
         <div class="flex h-16 items-center justify-between">
             <!-- Izquierda: menú móvil + marca -->
             <div class="flex items-center gap-3">
-                <button matButton [matMenuTriggerFor]="menu"
-                    class="md:hidden inline-flex items-center justify-center rounded-full text-slate-700 hover:bg-orange-50 active:bg-orange-100 focus-visible:outline focus-visible:outline-orange-500 transition">
+                <div class="md:hidden">
+                    <button matButton [matMenuTriggerFor]="menu"
+                    class=" inline-flex items-center justify-center rounded-full text-text hover:bg-orange-50 active:bg-orange-100 focus-visible:outline focus-visible:outline-orange-500 transition">
                     <mat-icon>menu</mat-icon>
                 </button>
+                </div>
                 <mat-menu #menu="matMenu">
                     <a mat-menu-item routerLink="/tienda/inicio" routerLinkActive="!text-orange-700 !bg-orange-50"
                         class="block rounded-lg px-3 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-700">Inicio</a>
