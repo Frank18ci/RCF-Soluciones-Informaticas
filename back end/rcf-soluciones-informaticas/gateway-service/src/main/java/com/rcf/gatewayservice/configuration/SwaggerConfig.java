@@ -1,4 +1,4 @@
-package com.rcf.schedulesservice.configuration;
+package com.rcf.gatewayservice.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -11,10 +11,9 @@ public class SwaggerConfig {
     OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("API de Servicio de horarios")
+                        .title("API de RCF Solutions Information Technology")
                         .version("1.0.0")
-                        .description("API para gestionar horarios en el sistema.")
+                        .description("API para gestionar de productos y servicios.")
                 );
     }
-
 }
