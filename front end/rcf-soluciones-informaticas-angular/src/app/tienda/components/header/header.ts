@@ -14,7 +14,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './header.css'
 })
 export class Header implements OnInit, OnDestroy {
-   showTopbar: Observable<boolean> = new BehaviorSubject(true);
+   showTopbar: Observable<boolean> = new BehaviorSubject(false);
 
 
   ngOnInit() {
