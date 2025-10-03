@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-inicio-page',
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './inicio-page.html',
   styleUrl: './inicio-page.css'
 })
