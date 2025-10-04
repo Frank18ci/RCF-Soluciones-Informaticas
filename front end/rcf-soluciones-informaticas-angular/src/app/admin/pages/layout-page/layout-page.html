@@ -1,2 +1,6 @@
-admin
-<router-outlet></router-outlet>
+<div class="flex min-h-screen *:bg-gray-100 *:text-gray-800 min-w-full ">
+    <app-panel-admin   class="fixed top-0 left-0 h-screen w-64 border-gray-300 border-r bg-white hidden md:block" />
+    <div class="flex-1 p-6 ml-0 lg:ml-64">
+        <router-outlet></router-outlet>
+    </div>
+</div>

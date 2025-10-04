@@ -1,1 +1,81 @@
-<p>dashboard-page works!</p>
+<div class="container mx-auto">
+    <h1 class="text-3xl font-semibold mb-2">Dashboard</h1>
+    <p class="text-gray-600">Resumen de las operaciones de tienda</p>
+    <div class="grid md:grid-cols-3 gap-2 mt-6">
+        <div class="p-4 bg-white rounded-lg shadow-md border border-transparent hover:border-gray-300 transition-all duration-300">
+            <h2 class="text-xl mb-2">Ordenes Totales</h2>
+            <p class="text-3xl font-semibold">1,343</p>
+            <p class="text-green-400 text-lg">+10%</p>
+        </div>
+        <div class="p-4 bg-white rounded-lg shadow-md border border-transparent hover:border-gray-300 transition-all duration-300">
+            <h2 class="text-xl mb-2">Ingresos Totales</h2>
+            <p class="text-3xl font-semibold">S/. 23,232</p>
+            <p class="text-green-400 text-lg">+5%</p>
+        </div>
+        <div class="p-4 bg-white rounded-lg shadow-md border border-transparent hover:border-gray-300 transition-all duration-300">
+            <h2 class="text-xl mb-2">Clientes Activos</h2>
+            <p class="text-3xl font-semibold">234</p>
+            <p class="text-green-400 text-lg">+8%</p>
+        </div>
+    </div>
+    <div class="bg-white p-4 shadow-md rounded-lg border border-transparent hover:border-gray-300 transition-all duration-300 mt-6">
+        <h2 class="text-xl mb-2 font-semibold">Órdenes en Estados</h2>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <div class="grid sm:grid-cols-2 md:grid-cols-5 gap-5">
+            <div class="bg-yellow-100 text-yellow-800 text-sm font-semibold px-3 py-1 rounded-full text-center">Pendiente</div>
+            <div class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full text-center">En Proceso</div>
+            <div class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full text-center">Completado</div>
+            <div class="bg-red-100 text-red-800 text-sm font-semibold px-3 py-1 rounded-full text-center">Cancelado</div>
+            <div class="bg-gray-100 text-gray-800 text-sm font-semibold px-3 py-1 rounded-full text-center">Reembolsado</div>
+        </div>
+    </div>
+    <div class="bg-white p-4 shadow-md rounded-lg border border-transparent hover:border-gray-300 transition-all duration-300 mt-6">
+        <h3 class="text-xl mb-2 font-semibold">Productos Más Vendidos</h3>
+        <table class="w-full table-auto border-collapse">
+            <thead>
+                <tr class="bg-gray-100 text-lg text-gray-500 *:py-2 *:px-0.5">
+                    <th class="text-left">Producto</th>
+                    <th class="text-left">Ventas</th>
+                    <th class="text-left">Ingresos</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-800">
+                <tr class="border-t border-gray-200 hover:bg-gray-50 *:py-2">
+                    <td>Computadora 23 LG</td>
+                    <td>150</td>
+                    <td>S/. 45,000</td>
+                </tr>
+                <tr class="border-t border-gray-200 hover:bg-gray-50 *:py-2">
+                    <td>Impresora HP</td>
+                    <td>120</td>
+                    <td>S/. 18,000</td>
+                </tr>
+                <tr class="border-t border-gray-200 hover:bg-gray-50 *:py-2">
+                    <td>Monitor Samsung</td>
+                    <td>100</td>
+                    <td>S/. 30,000</td>
+                </tr>
+                <tr class="border-t border-gray-200 hover:bg-gray-50 *:py-2">
+                    <td>Teclado Mecánico</td>
+                    <td>80</td>
+                    <td>S/. 12,000</td>
+                </tr>
+                <tr class="border-t border-gray-200 hover:bg-gray-50 *:py-2">
+                    <td>Mouse Inalámbrico</td>
+                    <td>70</td>
+                    <td>S/. 7,000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

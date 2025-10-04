@@ -1,0 +1,4 @@
+.active-link {
+    background-color: #e0f2fe; /* Tailwind bg-sky-100 */
+    color: #1e40af;            /* Tailwind text-blue-800 */
+}

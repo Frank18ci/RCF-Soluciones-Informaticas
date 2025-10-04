@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { PanelAdmin } from '../../components/panel-admin/panel-admin';
 
 @Component({
   selector: 'app-layout-page',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, PanelAdmin],
   templateUrl: './layout-page.html',
   styleUrl: './layout-page.css'
 })
