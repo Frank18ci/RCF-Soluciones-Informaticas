@@ -1,5 +1,7 @@
 package com.rcf.schedulesservice.service.impl;
 
+import com.rcf.schedulesservice.client.ServiceClient;
+import com.rcf.schedulesservice.client.UserClient;
 import com.rcf.schedulesservice.dto.ServiceBookingRequest;
 import com.rcf.schedulesservice.dto.ServiceBookingResponse;
 import com.rcf.schedulesservice.exception.ResourceNotFound;
@@ -17,6 +19,8 @@ import java.util.List;
 public class ServiceBookingServiceImpl implements ServiceBookingService {
     private final ServiceBookingRepository serviceBookingRepository;
     private final ServiceBookingMapper serviceBookingMapper;
+    private final UserClient userClient;
+    private final ServiceClient serviceClient;
 
     @Override
     public List<ServiceBookingResponse> getAllServiceBookings() {
@@ -32,6 +36,8 @@ public class ServiceBookingServiceImpl implements ServiceBookingService {
 
     @Override
     public ServiceBookingResponse createServiceBooking(ServiceBookingRequest serviceBookingRequest) {
+        userClient.findById(serviceBookingRequest.userId());
+        serviceClient.getServiceById(serviceBookingRequest.serviceId());
         return serviceBookingMapper.toDto(serviceBookingRepository.save(serviceBookingMapper.toEntity(serviceBookingRequest)));
     }
 
@@ -40,6 +46,10 @@ public class ServiceBookingServiceImpl implements ServiceBookingService {
         ServiceBooking serviceBookingFound = serviceBookingRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFound("Service booking not found with id: " + id)
         );
+
+        userClient.findById(serviceBookingRequest.userId());
+        serviceClient.getServiceById(serviceBookingRequest.serviceId());
+
         serviceBookingFound.setOrderItemId(serviceBookingRequest.orderItemId());
         serviceBookingFound.setUserId(serviceBookingRequest.userId());
         serviceBookingFound.setServiceId(serviceBookingRequest.serviceId());

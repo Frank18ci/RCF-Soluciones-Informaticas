@@ -1,5 +1,7 @@
 package com.rcf.ordersservice.service.impl;
 
+import com.rcf.ordersservice.client.ProductClient;
+import com.rcf.ordersservice.client.ServiceClient;
 import com.rcf.ordersservice.dto.OrderItemRequest;
 import com.rcf.ordersservice.dto.OrderItemResponse;
 import com.rcf.ordersservice.exception.ResourceNotFound;
@@ -18,6 +20,9 @@ public class OrderItemServiceImpl implements OrderItemService {
     private final OrderItemRepository orderItemRepository;
     private final OrderItemMapper orderItemMapper;
 
+    private final ServiceClient serviceClient;
+    private final ProductClient productClient;
+
     @Override
     public List<OrderItemResponse> getAllOrderItems() {
         return orderItemMapper.toDtoList(orderItemRepository.findAll());
@@ -32,6 +37,8 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public OrderItemResponse createOrderItem(OrderItemRequest orderItemRequest) {
+        serviceClient.getServiceById(orderItemRequest.orderId());
+        productClient.getProductById(orderItemRequest.productId());
         return orderItemMapper.toDto(orderItemRepository.save(orderItemMapper.toEntity(orderItemRequest)));
     }
 
@@ -40,6 +47,9 @@ public class OrderItemServiceImpl implements OrderItemService {
         OrderItem orderItemFound = orderItemRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFound("Order item not found with id: " + id)
         );
+
+        serviceClient.getServiceById(orderItemRequest.orderId());
+        productClient.getProductById(orderItemRequest.productId());
 
         orderItemFound.setOrder(orderItemMapper.toEntity(orderItemRequest).getOrder());
         orderItemFound.setServiceId(orderItemRequest.serviceId());

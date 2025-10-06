@@ -53,4 +53,13 @@ public class ExceptionHandleController {
         );
         return ResponseEntity.status(error.getStatus()).body(error);
     }
+    @ExceptionHandler(ServiceUnavailableException.class)
+    public ResponseEntity<?> serviceUnavailableException(ServiceUnavailableException e) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.SERVICE_UNAVAILABLE.value(),
+                e.getMessage(),
+                LocalDateTime.now().toString()
+        );
+        return ResponseEntity.status(error.getStatus()).body(error);
+    }
 }
