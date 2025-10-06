@@ -1,5 +1,7 @@
 package com.rcf.ordersservice.service.impl;
 
+import com.rcf.ordersservice.client.UserClient;
+import com.rcf.ordersservice.client.dto.UserResponse;
 import com.rcf.ordersservice.dto.OrderRequest;
 import com.rcf.ordersservice.dto.OrderResponse;
 import com.rcf.ordersservice.exception.ResourceNotFound;
@@ -15,6 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
+    private final UserClient userClient;
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
 
@@ -32,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponse createOrder(OrderRequest orderRequest) {
+        userClient.findById(orderRequest.userId());
         return orderMapper.toDto(orderRepository.save(orderMapper.toEntity(orderRequest)));
     }
 
@@ -40,6 +44,8 @@ public class OrderServiceImpl implements OrderService {
         Order orderFound = orderRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFound("Order not found with id: " + id)
         );
+
+        userClient.findById(orderRequest.userId());
 
         orderFound.setUserId(orderRequest.userId());
         orderFound.setCurrencyCode(orderRequest.currencyCode());

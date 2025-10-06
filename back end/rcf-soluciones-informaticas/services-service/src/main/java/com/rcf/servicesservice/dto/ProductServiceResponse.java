@@ -5,7 +5,7 @@ import lombok.Builder;
 @Builder
 public record ProductServiceResponse(
         Long id,
-        Long serviceId,
+        ServiceResponse service,
         Long productId,
         Long priceOverrideCents
 ) {
