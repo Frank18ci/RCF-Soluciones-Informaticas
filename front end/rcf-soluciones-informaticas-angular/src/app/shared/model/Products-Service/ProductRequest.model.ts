@@ -11,7 +11,4 @@ export interface ProductRequest {
   categoryId: number;           
   discountId: number;           
   active: boolean;              
-  createdAt: string;            
-  updatedAt: string;            
-  deletedAt: string;            
 }

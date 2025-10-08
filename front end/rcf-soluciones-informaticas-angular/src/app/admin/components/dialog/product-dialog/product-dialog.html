@@ -1,0 +1,91 @@
+<h2 mat-dialog-title>{{productId ? 'Editar' : 'Agregar'}} Producto</h2>
+<div mat-dialog-content class="bg-gray-50 rounded-xl p-6 shadow-sm">
+  <form class="grid grid-cols-1 md:grid-cols-2 gap-6" [formGroup]="form">
+    <!-- Columna izquierda -->
+    <div class="flex flex-col gap-4">
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>SKU</mat-label>
+        <input matInput formControlName="sku" name="sku" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" name="name" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Descripción corta</mat-label>
+        <input matInput formControlName="shortDescription" name="shortDescription" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput rows="3" formControlName="description" name="description" required></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="flex flex-col gap-4">
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Precio base (S/.)</mat-label>
+        <input matInput type="number" formControlName="basePriceCents" name="basePriceCents" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Precio de compra (S/.)</mat-label>
+        <input matInput type="number" formControlName="purchasePriceCents" name="purchasePriceCents" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Precio de venta (S/.)</mat-label>
+        <input matInput type="number" formControlName="salePriceCents" name="salePriceCents" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Impuesto (%)</mat-label>
+        <input matInput type="number" formControlName="taxRate" name="taxRate" required>
+      </mat-form-field>
+    </div>
+
+    <!-- Fila inferior -->
+    <div class="col-span-full grid md:grid-cols-2 lg:grid-cols-2 gap-4">
+      <mat-form-field  class="w-full *:px-3" >
+        <mat-label>Stock</mat-label>
+        <input matInput type="number" formControlName="stock" name="stock" required>
+      </mat-form-field>
+
+      <mat-form-field  class="w-full *:px-3">
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="categoryId" name="categoryId" required>
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Descuento</mat-label>
+        <mat-select formControlName="discountId" name="discountId">
+          <mat-option [value]="0">Sin descuento</mat-option>
+          <mat-option *ngFor="let discount of discounts" [value]="discount.id">
+            {{ discount.name }} - {{ discount.value }}%
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Activo</mat-label>
+        <mat-select formControlName="active" name="active" required>
+          <mat-option [value]="true">Sí</mat-option>
+          <mat-option [value]="false">No</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="saveProduct()" [disabled]="!productRequest.sku || !productRequest.name || !productRequest.shortDescription || !productRequest.description || !productRequest.basePriceCents || !productRequest.purchasePriceCents || !productRequest.salePriceCents || !productRequest.taxRate || !productRequest.stock || !productRequest.categoryId || productRequest.active === undefined">
+        {{productId ? 'Actualizar' : 'Guardar'}}
+    </button>
+</div>

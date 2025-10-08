@@ -11,3 +11,13 @@ services:
       - CONSUL_BIND_INTERFACE=eth0
     command: agent -dev -client=0.0.0.0
     restart: unless-stopped
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.1
+    container_name: keycloak-service
+    ports:
+      - "9000:8080"
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command:
+      - start-dev

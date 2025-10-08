@@ -1,7 +1,5 @@
 package com.rcf.servicesservice.client.dto;
 
-import com.rcf.ordersservice.client.dto.CategoryResponse;
-import com.rcf.ordersservice.client.dto.DiscountResponse;
 import lombok.Builder;
 
 import java.math.BigDecimal;

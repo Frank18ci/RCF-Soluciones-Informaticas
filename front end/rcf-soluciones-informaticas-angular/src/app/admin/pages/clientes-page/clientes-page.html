@@ -1,0 +1,92 @@
+<div class="container mx-auto">
+    <h1 class="text-2xl font-bold">Mantenimiento de Usuarios</h1>
+    <div class="my-4">
+        <button
+            (click)="openDialog()"
+            class="bg-blue-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 border border-transparent cursor-pointer">
+            <mat-icon class="align-middle">add</mat-icon> Agregar Usuario
+        </button>
+    </div>
+    <div class="bg-white rounded-lg p-4 my-4">
+        Buscador de usuarios (a implementar)
+    </div>
+    <div>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Correo">
+                <th mat-header-cell *matHeaderCellDef> Correo </th>
+                <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Nombre Completo">
+                <th mat-header-cell *matHeaderCellDef> Nombre Completo </th>
+                <td mat-cell *matCellDef="let user"> {{user.fullName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Rol">
+                <th mat-header-cell *matHeaderCellDef> Rol </th>
+                <td mat-cell *matCellDef="let user"> {{ user.role.name }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Celular">
+                <th mat-header-cell *matHeaderCellDef> Celular </th>
+                <td mat-cell *matCellDef="let user"> {{user.phone}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Activo">
+                <th mat-header-cell *matHeaderCellDef> Activo </th>
+                <td mat-cell *matCellDef="let user"> 
+                    <div
+                    class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-sm font-medium"
+                    [ngClass]="user.active
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-red-100 text-red-700'">
+                    <mat-icon class="text-base">
+                        {{ user.active ? 'check_circle' : 'cancel' }}
+                    </mat-icon>
+                    </div>
+                </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let user">
+                   <div class="flex gap-2">
+                    <button
+                        (click)="verUser(user.id)"
+                        mat-button
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors">
+                        <mat-icon class="text-base">visibility</mat-icon>
+                    </button>
+
+                    <button
+                        (click)="openDialog(user)"
+                        mat-button
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-yellow-600 bg-yellow-50 hover:bg-yellow-100 transition-colors">
+                        <mat-icon class="text-base">edit</mat-icon>
+                    </button>
+
+                    <button
+                        (click)="deleteUser(user.id)"
+                        mat-button
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-red-600 bg-red-50 hover:bg-red-100 transition-colors">
+                        <mat-icon class="text-base">delete</mat-icon>
+                    </button>
+                    </div>
+                </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                            showFirstLastButtons
+                            aria-label="Selección de página">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

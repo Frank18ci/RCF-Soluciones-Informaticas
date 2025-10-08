@@ -1,6 +1,11 @@
 spring:
   application:
     name: gateway-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000/realms/rfc-soluciones-informaticas
   cloud:
     consul:
       host: localhost
@@ -59,3 +64,5 @@ springdoc:
         url: /services/api-docs
 server:
   port: 8080
+
+
