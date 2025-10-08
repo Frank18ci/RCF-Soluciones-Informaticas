@@ -10,13 +10,14 @@ public record UserRequest(
         @Email(message = "email debe tener un formato valido")
         @NotBlank(message = "email no puede estar vacio")
         String email,
-        @NotBlank(message = "password no puede estar vacio")
         String password,
         @NotBlank(message = "fullName no puede estar vacio")
         String fullName,
         @NotNull(message = "roleId no puede ser nulo")
         Long roleId,
         @NotBlank(message = "phone no puede estar vacio")
-        String phone
+        String phone,
+        @NotNull(message = "active no puede ser nulo")
+        Boolean active
 ) {
 }

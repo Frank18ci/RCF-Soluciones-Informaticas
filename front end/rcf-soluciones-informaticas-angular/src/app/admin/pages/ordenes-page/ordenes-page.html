@@ -1,1 +1,94 @@
-<p>ordenes-page works!</p>
+<div class="container mx-auto">
+    <h1 class="text-2xl font-bold">Mantenimiento de Ordenes</h1>
+    <div class="my-4">
+        <button
+            (click)="openDialog()"
+            class="bg-blue-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 border border-transparent cursor-pointer">
+            <mat-icon class="align-middle">add</mat-icon> Agregar Order
+        </button>
+    </div>
+    <div class="bg-white rounded-lg p-4 my-4">
+        Buscador de ordenes (a implementar)
+    </div>
+    <div>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="Codigo de Orden">
+                <th mat-header-cell *matHeaderCellDef> Codigo de Orden </th>
+                <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Estado">
+                <th mat-header-cell *matHeaderCellDef> Estado de Orden </th>
+                <td mat-cell *matCellDef="let order"> 
+                    <div>
+                        <span *ngIf="order.orderStatus.code == 'PENDING'" class="bg-yellow-500 text-white px-2 py-1 rounded-lg">Pendiente</span>
+                    <span *ngIf="order.orderStatus.code == 'PAID'" class="bg-green-500 text-white px-2 py-1 rounded-lg">Pagada</span>
+                    <span *ngIf="order.orderStatus.code == 'COMPLETED'" class="bg-blue-500 text-white px-2 py-1 rounded-lg">Completada</span>
+                    <span *ngIf="order.orderStatus.code == 'CANCELLED'" class="bg-red-500 text-white px-2 py-1 rounded-lg">Cancelada</span>
+                    </div>
+                </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Metodo de Pago">
+                <th mat-header-cell *matHeaderCellDef> Metodo de Pago </th>
+                <td mat-cell *matCellDef="let order"> {{order.paymentMethodCode}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Subtotal (S/.)">
+                <th mat-header-cell *matHeaderCellDef> Subtotal (S/.) </th>
+                <td mat-cell *matCellDef="let order"> {{ order.subtotalCents / 100 | currency:'PEN':'symbol':'1.2-2' }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Impuestos (S/.)">
+                <th mat-header-cell *matHeaderCellDef> Impuestos (S/.) </th>
+                <td mat-cell *matCellDef="let order"> {{ order.taxTotalCents / 100 | currency:'PEN':'symbol':'1.2-2' }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Total (S/.)">
+                <th mat-header-cell *matHeaderCellDef> Total (S/.) </th>
+                <td mat-cell *matCellDef="let order"> {{ order.totalCents / 100 | currency:'PEN':'symbol':'1.2-2' }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Descuento (S/.)">
+                <th mat-header-cell *matHeaderCellDef> Descuento (S/.) </th>
+                <td mat-cell *matCellDef="let order"> {{ order.discountCents / 100 | currency:'PEN':'symbol':'1.2-2' }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let order">
+                   <div class="flex gap-2">
+                    <button
+                        (click)="verOrder(order.id)"
+                        mat-button
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors">
+                        <mat-icon class="text-base">visibility</mat-icon>
+                    </button>
+
+                    <button
+                        (click)="openDialog(order)"
+                        mat-button
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-yellow-600 bg-yellow-50 hover:bg-yellow-100 transition-colors">
+                        <mat-icon class="text-base">edit</mat-icon>
+                    </button>
+
+                    <button
+                        (click)="deleteOrder(order.id)"
+                        mat-button
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-red-600 bg-red-50 hover:bg-red-100 transition-colors">
+                        <mat-icon class="text-base">delete</mat-icon>
+                    </button>
+                    </div>
+                </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                            showFirstLastButtons
+                            aria-label="Selección de página">
+            </mat-paginator>
+        </div>
+    </div>
+</div>
