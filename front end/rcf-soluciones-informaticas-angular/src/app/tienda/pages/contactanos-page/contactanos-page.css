@@ -1,0 +1,19 @@
+/* Contactanos Page - estilos adicionales */
+
+:host {
+  display: block;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #e53e3e;
+  box-shadow: 0 0 3px rgba(229, 62, 62, 0.5);
+}
+
+form button {
+  transition: transform 0.2s ease;
+}
+
+form button:hover {
+  transform: translateY(-2px);
+}
