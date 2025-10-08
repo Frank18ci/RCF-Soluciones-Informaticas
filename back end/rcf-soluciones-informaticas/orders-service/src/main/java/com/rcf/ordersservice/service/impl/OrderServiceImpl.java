@@ -48,6 +48,7 @@ public class OrderServiceImpl implements OrderService {
         userClient.findById(orderRequest.userId());
 
         orderFound.setUserId(orderRequest.userId());
+        orderFound.setOrderStatus(orderMapper.toEntity(orderRequest).getOrderStatus());
         orderFound.setCurrencyCode(orderRequest.currencyCode());
         orderFound.setPaymentMethodCode(orderRequest.paymentMethodCode());
         orderFound.setSubtotalCents(orderRequest.subtotalCents());

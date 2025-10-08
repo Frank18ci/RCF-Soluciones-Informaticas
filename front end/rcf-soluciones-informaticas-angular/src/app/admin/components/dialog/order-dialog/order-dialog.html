@@ -1,0 +1,76 @@
+<h2 mat-dialog-title>{{orderId ? 'Editar' : 'Agregar'}} Orden</h2>
+<div mat-dialog-content class="bg-gray-50 rounded-xl p-6 shadow-sm">
+  <form class="grid grid-cols-1 md:grid-cols-2 gap-6" [formGroup]="form">
+    <!-- Columna izquierda -->
+    <div class="flex flex-col gap-4">
+        
+        <mat-form-field class="w-full *:px-3">
+            <mat-label>Cliente</mat-label>
+            <mat-select formControlName="userId" name="userId" required>
+            <mat-option *ngFor="let user of users" [value]="user.id">
+                {{ user.fullName }}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-full *:px-3">
+            <mat-label>Codigo de Pago</mat-label>
+            <input matInput formControlName="currencyCode" name="currencyCode" required>
+        </mat-form-field>
+
+        <mat-form-field class="w-full *:px-3">
+            <mat-label>Estado de Orden</mat-label>
+            <mat-select formControlName="orderStatusId" name="orderStatusId" required>
+            <mat-option *ngFor="let status of orderStatuses" [value]="status.id">
+                {{ status.code }}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Codigo de Metodo de Pago</mat-label>
+        <input matInput formControlName="paymentMethodCode" name="paymentMethodCode" required>
+      </mat-form-field>
+
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="flex flex-col gap-4">
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Subtotal (S/.)</mat-label>
+        <input matInput type="number" formControlName="subtotalCents" name="subtotalCents" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Impuestos (S/.)</mat-label>
+        <input matInput type="number" formControlName="taxTotalCents" name="taxTotalCents" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Total (S/.)</mat-label>
+        <input matInput type="number" formControlName="totalCents" name="totalCents" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-full *:px-3">
+        <mat-label>Descuento (S/.)</mat-label>
+        <input matInput type="number" formControlName="discountCents" name="discountCents" required>
+      </mat-form-field>
+    </div>
+
+    <!-- Group inferior -->
+    <div class="col-span-full grid grid-cols-1 gap-4">
+        <mat-form-field class="w-full *:px-3">
+            <mat-label>Notes</mat-label>
+            <textarea matInput rows="3" formControlName="notes" name="notes" required></textarea>
+        </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="saveOrder()" [disabled]="form.invalid">
+        {{orderId ? 'Actualizar' : 'Guardar'}}
+    </button>
+    <p>{{form.value | json}}</p>
+</div>

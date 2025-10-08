@@ -58,10 +58,13 @@ public class UserServiceImpl implements UserService {
                 () -> new ResourceNotFound("User not found with id: " + id)
         );
         userFound.setEmail(userRequest.email());
-        userFound.setPassword(userRequest.password());
+        if(userRequest.password() != null && !userRequest.password().isBlank()) {
+            userFound.setPassword(userRequest.password());
+        }
         userFound.setFullName(userRequest.fullName());
         userFound.setRole(userMapper.toEntity(userRequest).getRole());
         userFound.setPhone(userRequest.phone());
+        userFound.setActive(userRequest.active());
         return userMapper.toDto(userRepository.save(userFound));
     }
 
