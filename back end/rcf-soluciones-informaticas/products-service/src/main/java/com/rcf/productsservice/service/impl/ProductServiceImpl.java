@@ -32,7 +32,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse createProduct(ProductRequest productRequest) {
-        return productMapper.toDto(productRepository.save(productMapper.toEntity(productRequest)));
+        Product product = productMapper.toEntity(productRequest);
+        if(productRequest.discountId() != null && productRequest.discountId() > 0) {
+            product.setDiscount(productMapper.toEntity(productRequest).getDiscount());
+        } else {
+            product.setDiscount(null);
+        }
+        return productMapper.toDto(productRepository.save(product));
     }
 
     @Override
@@ -50,8 +56,12 @@ public class ProductServiceImpl implements ProductService {
         productFound.setTaxRate(productRequest.taxRate());
         productFound.setStock(productRequest.stock());
         productFound.setCategory(productMapper.toEntity(productRequest).getCategory());
-        productFound.setDiscount(productMapper.toEntity(productRequest).getDiscount());
-
+        if(productRequest.discountId() != null && productRequest.discountId() > 0) {
+            productFound.setDiscount(productMapper.toEntity(productRequest).getDiscount());
+        } else {
+            productFound.setDiscount(null);
+        }
+        productFound.setActive(productRequest.active());
         return productMapper.toDto(productRepository.save(productFound));
     }
 
