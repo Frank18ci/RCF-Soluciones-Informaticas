@@ -15,7 +15,12 @@ CREATE TABLE categories (
 CREATE INDEX idx_categories_parent ON categories(parent_id);
 
 INSERT INTO categories (name, slug) 
-VALUES ('Cámaras', 'camaras');
+VALUES ('Cámaras', 'camaras'),
+('Accesorios', 'accesorios'),
+('Video', 'video'),
+('Audio', 'audio'),
+('Computadoras', 'computadoras'),
+('Monitores', 'monitores');
 
 CREATE TABLE discounts_types(
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -75,8 +80,12 @@ CREATE TABLE products (
 CREATE INDEX idx_products_category ON products(category_id);
 CREATE INDEX idx_products_active ON products(active);
 
-INSERT INTO products (sku, name, base_price_cents, purchase_price_cents, sale_price_cents, tax_rate, stock, category_id, discount_id)
-VALUES ('CAM-001', 'Cámara HD', 150000, 100000, 180000, 18.00, 20, 1, 1);
+INSERT INTO products (sku, name, base_price_cents, purchase_price_cents, sale_price_cents, tax_rate, stock, category_id, discount_id, short_description, description)
+VALUES ('CAM-001', 'Cámara HD', 150000, 100000, 180000, 18.00, 20, 1, 1, 'Cámara de alta definición', 'Cámara HD con resolución 1080p, ideal para grabaciones profesionales.'),
+('LEN-001', 'Lente Zoom', 150000, 120000, 200000, 18.00, 15, 1, NULL, 'Lente con zoom óptico 10x', 'Lente zoom compatible con cámaras DSLR, ofrece una calidad de imagen superior.'),
+('ACC-001', 'Trípode', 50000, 30000, 70000, 18.00, 30, 2, NULL, 'Trípode ajustable', 'Trípode ligero y ajustable, perfecto para fotografía y video.'),
+('MON-001', 'Monitor 4K', 800000, 600000, 950000, 18.00, 10, 6, NULL, 'Monitor con resolución 4K', 'Monitor profesional con resolución 4K, ideal para edición de video y fotografía.'),
+('AUD-001', 'Micrófono Profesional', 200000, 150000, 250000, 18.00, 25, 4, NULL, 'Micrófono de alta calidad', 'Micrófono profesional con cancelación de ruido, ideal para grabaciones de estudio.');
 
 CREATE TABLE product_attribute_values (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,

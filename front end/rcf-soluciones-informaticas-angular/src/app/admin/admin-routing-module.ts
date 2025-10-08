@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutPage } from './pages/layout-page/layout-page';
 import { DashboardPage } from './pages/dashboard-page/dashboard-page';
 import { ProductosPage } from './pages/productos-page/productos-page';
-import { OrdenesPage } from './orders/ordenes-page/ordenes-page';
-import { ClientesPage } from './orders/clientes-page/clientes-page';
+import { OrdenesPage } from './pages/ordenes-page/ordenes-page';
+import { ClientesPage } from './pages/clientes-page/clientes-page';
 
 const routes: Routes = [
   {

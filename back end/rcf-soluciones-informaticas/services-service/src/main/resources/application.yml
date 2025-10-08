@@ -10,6 +10,11 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000/realms/rfc-soluciones-informaticas
   cloud:
     consul:
       host: localhost

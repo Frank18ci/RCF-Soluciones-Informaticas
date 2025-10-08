@@ -113,7 +113,12 @@ CREATE TABLE categories (
 CREATE INDEX idx_categories_parent ON categories(parent_id);
 
 INSERT INTO categories (name, slug) 
-VALUES ('Cámaras', 'camaras');
+VALUES ('Cámaras', 'camaras'),
+('Accesorios', 'accesorios'),
+('Video', 'video'),
+('Audio', 'audio'),
+('Computadoras', 'computadoras'),
+('Monitores', 'monitores');
 
 CREATE TABLE discounts_types(
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
