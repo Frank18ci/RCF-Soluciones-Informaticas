@@ -17,13 +17,7 @@ public class SwaggerConfig {
                         .title("API de Servicio de Usuarios")
                         .version("1.0.0")
                         .description("API para gestionar usuarios en el sistema")
-                )
-                .addSecurityItem(new SecurityRequirement().addList("keycloak"))
-                .components(new Components()
-                        .addSecuritySchemes("keycloak",
-                                new SecurityScheme()
-                                        .type(SecurityScheme.Type.OPENIDCONNECT)
-                                        .openIdConnectUrl("http://localhost:9000/realms/rfc-soluciones-informaticas/.well-known/openid-configuration")));
+                );
     }
 
 }

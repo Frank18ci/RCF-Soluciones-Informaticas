@@ -45,13 +45,25 @@ export class ProductosPage implements OnInit, AfterViewInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        if(productDialogData){
-          this.productService.createProduct(result).subscribe(() => {
-              this.loadProductos();
+        if(productDialogData.id){
+          console.log('Actualizar producto:', productDialogData.id, result);
+          this.productService.updateProduct(productDialogData.id, result).subscribe({
+              next: () => {
+                this.loadProductos();
+              },
+              error: (err) => {
+                console.error('Error al actualizar producto:', err);
+              }
           });
         } else {
-          this.productService.updateProduct(productDialogData.id, result).subscribe(() => {
-              this.loadProductos();
+          console.log('Crear producto:', result);
+          this.productService.createProduct(result).subscribe({
+              next: () => {
+                  this.loadProductos();
+              },
+              error: (err) => {
+                  console.error('Error al crear producto:', err);
+              }
           });
         }
       }
@@ -59,7 +71,7 @@ export class ProductosPage implements OnInit, AfterViewInit {
   }
   verProducto(productId: number) {
     this.productService.getProductById(productId).subscribe(product => {
-      console.log(product);
+      console.log('Producto:', product);
     });
   }
   deleteProduct(productId: number) {

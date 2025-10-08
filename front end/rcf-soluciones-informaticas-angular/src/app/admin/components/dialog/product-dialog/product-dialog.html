@@ -85,7 +85,8 @@
 </div>
 <div mat-dialog-actions align="end">
     <button mat-button (click)="closeDialog()">Cancelar</button>
-    <button mat-raised-button color="primary" (click)="saveProduct()" [disabled]="!productRequest.sku || !productRequest.name || !productRequest.shortDescription || !productRequest.description || !productRequest.basePriceCents || !productRequest.purchasePriceCents || !productRequest.salePriceCents || !productRequest.taxRate || !productRequest.stock || !productRequest.categoryId || productRequest.active === undefined">
+    <button mat-raised-button color="primary" (click)="saveProduct()" [disabled]="form.invalid">
         {{productId ? 'Actualizar' : 'Guardar'}}
     </button>
+    <p>{{form.value | json}}</p>
 </div>

@@ -37,12 +37,6 @@ public record ProductRequest(
         @NotNull(message = "discount no pude ser nulo")
         Long discountId,
         @NotNull(message = "active no pude ser nulo")
-        Boolean active,
-        @NotNull(message = "createdAt no puede ser nulo")
-        LocalDateTime createdAt,
-        @NotNull(message = "updatedAt no puede ser nulo")
-        LocalDateTime updatedAt,
-        @NotNull(message = "deletedAt no puede ser nulo")
-        LocalDateTime deletedAt
+        Boolean active
 ) {
 }
