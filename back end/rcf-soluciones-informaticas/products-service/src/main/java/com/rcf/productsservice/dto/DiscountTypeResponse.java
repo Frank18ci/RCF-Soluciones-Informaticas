@@ -1,6 +1,5 @@
 package com.rcf.productsservice.dto;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 @Builder

@@ -33,7 +33,11 @@ public class CategorySreviceImpl implements CategorySrevice {
 
     @Override
     public CategoryResponse createCategory(CategoryRequest categoryRequest) {
-        return categoryMapper.toDto(categoryRepository.save(categoryMapper.toEntity(categoryRequest)));
+        Category category = categoryMapper.toEntity(categoryRequest);
+        if(categoryRequest.parentId() == null || categoryRequest.parentId() == 0) {
+            category.setParent(null);
+        }
+        return categoryMapper.toDto(categoryRepository.save(category));
     }
 
     @Override
@@ -43,7 +47,12 @@ public class CategorySreviceImpl implements CategorySrevice {
         );
         categoryFound.setName(categoryRequest.name());
         categoryFound.setSlug(categoryRequest.slug());
-        categoryFound.setParent(categoryMapper.toEntity(categoryRequest).getParent());
+        if(categoryRequest.parentId() == null || categoryRequest.parentId() == 0) {
+            categoryFound.setParent(null);
+        }
+        if(categoryRequest.parentId() != null && categoryRequest.parentId() > 0) {
+            categoryFound.setParent(categoryMapper.toEntity(categoryRequest).getParent());
+        }
 
         return categoryMapper.toDto(categoryRepository.save(categoryFound));
     }

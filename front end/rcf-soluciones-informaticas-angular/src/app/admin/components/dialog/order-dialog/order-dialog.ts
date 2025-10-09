@@ -105,7 +105,6 @@ export class OrderDialog implements OnInit {
         ...this.orderRequest,
         ...this.form.value
       };
-      console.log(updateOrder);
       this.dialogRef.close(updateOrder);
     }
   }

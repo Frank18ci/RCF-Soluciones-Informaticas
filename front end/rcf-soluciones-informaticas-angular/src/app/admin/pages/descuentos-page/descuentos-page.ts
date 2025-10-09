@@ -6,6 +6,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import Discount from '../../../shared/model/Discount';
 import { DiscountService } from '../../../shared/services/product-services/discount-service';
 import { MatDialog } from '@angular/material/dialog';
+import { DescuentoDialog } from '../../components/dialog/descuento-dialog/descuento-dialog';
 
 @Component({
   selector: 'app-descuentos-page',
@@ -14,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './descuentos-page.css'
 })
 export class DescuentosPage implements OnInit, AfterViewInit{
-  displayedColumns: string[] = ['Id', 'Nombre', 'Descripcion', 'Tipo descuento', 'Valor', 'Fecha Inicio', 'Fecha Fin', 'Activo', 'Acciones'];
+  displayedColumns: string[] = ['Id', 'Code', 'Descripcion', 'Tipo descuento', 'Valor', 'Activo', 'Fecha Inicio', 'Fecha Fin', 'Acciones'];
   dataSource = new MatTableDataSource<Discount>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(
@@ -30,6 +31,7 @@ export class DescuentosPage implements OnInit, AfterViewInit{
   loadDiscounts() {
     this.discountService.getDiscounts().subscribe(discounts => {
       this.dataSource.data = discounts;
+      console.log('Discounts loaded:', discounts);
     });
   }
   deleteDiscount(discountId: number) {
@@ -40,7 +42,29 @@ export class DescuentosPage implements OnInit, AfterViewInit{
     }
   }
   openDialog(discount?: Discount): void {
-    console.log('Open dialog for discount:', discount);
+    let discountDialogData: any = {};
+    if (discount) {
+      discountDialogData = { ...discount };
+    }
+    const dialogRef = this.dialog.open(DescuentoDialog, {
+      width: '700px',
+      data: discount ? discountDialogData : {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (discountDialogData.id) {
+          this.discountService.updateDiscount(discountDialogData.id, result).subscribe({
+            next: () => this.loadDiscounts(),
+            error: (err) => console.error('Error al actualizar descuento:', err)
+          });
+        } else {
+          this.discountService.createDiscount(result).subscribe({
+            next: () => this.loadDiscounts(),
+            error: (err) => console.error('Error al crear descuento:', err)
+          });
+        }
+      }
+    });
   }
   verDiscount(discount: Discount): void {
     console.log('View discount:', discount);

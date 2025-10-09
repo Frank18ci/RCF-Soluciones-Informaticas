@@ -7,6 +7,7 @@ import CategoryRequest from '../../../shared/model/Products-Service/CategoryRequ
 import { CategoryService } from '../../../shared/services/product-services/category-service';
 import { MatDialog } from '@angular/material/dialog';
 import Category from '../../../shared/model/Category';
+import { CategoryDialog } from '../../components/dialog/category-dialog/category-dialog';
 
 @Component({
   selector: 'app-categorias-page',
@@ -32,7 +33,29 @@ export class CategoriasPage implements OnInit, AfterViewInit{
     });
   }
   openDialog(category?: Category) {
-    console.log('Open dialog for category:', category);
+    let categoryDialogData: any = {};
+    if (category) {
+      categoryDialogData = { ...category };
+    }
+    const dialogRef = this.dialog.open(CategoryDialog, {
+      width: '700px',
+      data: category? categoryDialogData : {}
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (categoryDialogData.id) {
+          this.categoryService.updateCategory(categoryDialogData.id, result).subscribe({
+            next: () => this.loadCategories(),
+            error: (err) => console.error('Error al actualizar categoría:', err)
+          });
+        } else {
+          this.categoryService.createCategory(result).subscribe({
+            next: () => this.loadCategories(),
+            error: (err) => console.error('Error al crear categoría:', err)
+          });
+        }
+      }
+    });
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
