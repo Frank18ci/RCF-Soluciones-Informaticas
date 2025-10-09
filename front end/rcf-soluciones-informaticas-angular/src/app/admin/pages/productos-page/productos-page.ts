@@ -46,7 +46,6 @@ export class ProductosPage implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if(productDialogData.id){
-          console.log('Actualizar producto:', productDialogData.id, result);
           this.productService.updateProduct(productDialogData.id, result).subscribe({
               next: () => {
                 this.loadProductos();
@@ -56,7 +55,6 @@ export class ProductosPage implements OnInit, AfterViewInit {
               }
           });
         } else {
-          console.log('Crear producto:', result);
           this.productService.createProduct(result).subscribe({
               next: () => {
                   this.loadProductos();

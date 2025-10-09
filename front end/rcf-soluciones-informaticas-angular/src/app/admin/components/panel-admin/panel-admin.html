@@ -5,15 +5,57 @@
     <a routerLink="/admin/dashboard" routerLinkActive="active-link" class="px-4 py-2 font-semibold flex items-center gap-2">
       <mat-icon>dashboard</mat-icon> Dashboard
     </a>
-    <a routerLink="/admin/products" routerLinkActive="active-link" class="px-4 py-2 font-semibold flex items-center gap-2">
-      <mat-icon>inventory</mat-icon> Productos
-    </a>
-    <a routerLink="/admin/orders" routerLinkActive="active-link" class="px-4 py-2 font-semibold flex items-center gap-2">
-      <mat-icon>shopping_cart</mat-icon> Ordenes
-    </a>
-    <a routerLink="/admin/customers" routerLinkActive="active-link" class="px-4 py-2 font-semibold flex items-center gap-2">
-      <mat-icon>people</mat-icon> Clientes
-    </a>
+    <div class="my-2">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Inventario </mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>inventory</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <a routerLink="/admin/products" routerLinkActive="active-link" class="px-4 py-2 font-semibold flex items-center gap-2">
+          <mat-icon>inventory</mat-icon> Productos
+        </a>
+        <a routerLink="/admin/categories" routerLinkActive="active-link" class="px-4 py-2 font-semibold flex items-center gap-2">
+          <mat-icon>category</mat-icon> Categorías
+        </a>
+        <a routerLink="/admin/discounts" routerLinkActive="active-link" class="px-4 py-2 font-semibold flex items-center gap-2">
+          <mat-icon>price_check</mat-icon> Descuentos
+        </a>
+      </mat-expansion-panel>
+    </div>
+    <div class="my-2">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Ventas </mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>shopping_cart</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <a routerLink="/admin/orders" routerLinkActive="active-link" class="px-4 py-2 font-semibold flex items-center gap-2">
+          <mat-icon>shopping_cart</mat-icon> Ordenes
+        </a>
+        
+      </mat-expansion-panel>
+    </div>
+    
+    <div class="my-2">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Usuarios </mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>people</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <a routerLink="/admin/customers" routerLinkActive="active-link" class="px-4 py-2 font-semibold flex items-center gap-2">
+          <mat-icon>people</mat-icon> Clientes
+        </a>
+        
+      </mat-expansion-panel>
+    </div>
 
     <a routerLink="/admin/settings" routerLinkActive="active-link" class="px-4 py-2 font-semibold flex items-center gap-2 mt-auto">
       <mat-icon>settings</mat-icon> Configuración
