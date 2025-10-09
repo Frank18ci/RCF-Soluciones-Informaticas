@@ -18,6 +18,8 @@ public record DiscountRequest(
         Long discountTypeId,
         @NotNull (message = "value no puede ser nulo")
         BigDecimal value,
+        @NotNull(message = "active no puede ser nulo")
+        Boolean active,
         @NotNull (message = "startDate no puede ser nulo")
         LocalDateTime startDate,
         @NotNull (message = "endDate no puede ser nulo")

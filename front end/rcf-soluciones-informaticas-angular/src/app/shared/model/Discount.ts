@@ -2,7 +2,7 @@ import DiscountType from "./DiscountType";
 
 export default interface Discount {
     id: number;
-    name: string;
+    code: string;
     description: string;
     discountType: DiscountType;
     value: number;

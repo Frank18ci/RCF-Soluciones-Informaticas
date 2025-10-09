@@ -23,7 +23,7 @@ public class Category {
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_categories_parent"))
     private Category parent;
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "parent")
     private List<Category> children;
     @Column(length = 120, nullable = false, unique = true)
     private String name;

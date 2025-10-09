@@ -35,16 +35,17 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public DiscountResponse updateDiscount(Long id, DiscountRequest discountRequest) {
-        Discount discountFount = discountRepository.findById(id).orElseThrow(
+        Discount discountFound = discountRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFound ("Discount not found with id:"+ id)
         );
-        discountFount.setCode(discountRequest.code());
-        discountFount.setDescription(discountRequest.description());
-        discountFount.setDiscountType(discountMapper.toEntity(discountRequest).getDiscountType());
-        discountFount.setValue(discountRequest.value());
-        discountFount.setStartDate(discountRequest.startDate());
-        discountFount.setEndDate(discountRequest.endDate());
-        return null;
+        discountFound.setCode(discountRequest.code());
+        discountFound.setDescription(discountRequest.description());
+        discountFound.setDiscountType(discountMapper.toEntity(discountRequest).getDiscountType());
+        discountFound.setValue(discountRequest.value());
+        discountFound.setActive(discountRequest.active());
+        discountFound.setStartDate(discountRequest.startDate());
+        discountFound.setEndDate(discountRequest.endDate());
+        return discountMapper.toDto(discountRepository.save(discountFound));
     }
 
     @Override

@@ -7,6 +7,7 @@ import { OrdenesPage } from './pages/ordenes-page/ordenes-page';
 import { ClientesPage } from './pages/clientes-page/clientes-page';
 import { CategoriasPage } from './pages/categorias-page/categorias-page';
 import { DescuentosPage } from './pages/descuentos-page/descuentos-page';
+import { ServiciosPage } from './pages/servicios-page/servicios-page';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'products',
         component: ProductosPage
+      },
+      {
+        path: 'services',
+        component: ServiciosPage
       },
       {
         path: 'categories',

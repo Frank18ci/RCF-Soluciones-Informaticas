@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Builder
 public record DiscountResponse(
         Long id,
-        String name,
+        String code,
         String description,
         DiscountTypeResponse discountType,
         BigDecimal value,
