@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { ProductService } from '../../../../shared/services/product-services/product-service';
 
 @Component({
   selector: 'app-product-dialog',
@@ -38,6 +39,7 @@ export class ProductDialog implements OnInit{
     name: '',
     shortDescription: '',
     description: '',
+    image: null,
     basePriceCents: 0,
     purchasePriceCents: 0,
     salePriceCents: 0,
@@ -48,6 +50,7 @@ export class ProductDialog implements OnInit{
     active: true
   };
   productId?: number;
+  nombreImagen: string = '';
   categories: Category[] = [];
   discounts: Discount[] = [];
 
@@ -57,6 +60,7 @@ export class ProductDialog implements OnInit{
     private fb: FormBuilder,
     private discountService: DiscountService,
     private categoryService: CategoryService,
+    private productService: ProductService,
     private cdRef: ChangeDetectorRef
     ) {
       if(data){
@@ -65,6 +69,7 @@ export class ProductDialog implements OnInit{
           name: data.name ?? '',
           shortDescription: data.shortDescription ?? '',
           description: data.description ?? '',
+          image: null,
           basePriceCents: data.basePriceCents ?? 0,
           purchasePriceCents: data.purchasePriceCents ?? 0,
           salePriceCents: data.salePriceCents ?? 0,
@@ -75,6 +80,7 @@ export class ProductDialog implements OnInit{
           active: data.active ?? true
         };
         this.productId = data.id ?? undefined;
+        this.nombreImagen = data.imgUrl ?? '';
       }
   }
   ngOnInit() {  
@@ -109,16 +115,40 @@ export class ProductDialog implements OnInit{
     this.cdRef.detectChanges();
   });
   }
+  selectedImageFile: File | null = null;
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const firstFile: File | null = input.files && input.files.length ? input.files[0] : null;
+    this.selectedImageFile = firstFile;
+    this.nombreImagen = firstFile ? firstFile.name : '';
+  }
   
   saveProduct() {
-    if(this.form.valid) {
-      const updateProduct: ProductRequest = {
-        ...this.productRequest,
-        ...this.form.value
-      };
-      this.dialogRef.close(updateProduct);
+    if (this.form.invalid) return;
+
+    const formValue = this.form.value;
+    const fd = new FormData();
+
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (key === 'image' || value === null || value === undefined) return;
+      fd.append(key, value.toString());
+    });
+
+    if (this.selectedImageFile) {
+      fd.append('image', this.selectedImageFile);
     }
+
+    const request$ = this.productId
+      ? this.productService.updateProduct(this.productId, fd)
+      : this.productService.createProduct(fd);
+
+    request$.subscribe({
+      next: res => this.dialogRef.close(res),
+      error: err => console.error('Error al guardar producto:', err)
+    });
   }
+  
   closeDialog() {
     this.dialogRef.close();
   }

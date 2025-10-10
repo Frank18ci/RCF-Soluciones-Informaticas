@@ -1,6 +1,13 @@
 spring:
   application:
     name: products-service
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  web:
+    resources:
+      static-locations: file:uploads/
   datasource:
     url: jdbc:mysql://localhost:3306/RCF_SOLUCIONES_INFORMATICAS_PRODUCTS_SERVICE?useSSL=false&allowPublicKeyRetrieval=true&serverTimeZone=UTC&autoReconnect=true
     username: root

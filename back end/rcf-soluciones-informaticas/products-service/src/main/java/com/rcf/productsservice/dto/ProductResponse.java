@@ -11,6 +11,7 @@ public record ProductResponse(
         String sku,
         String name,
         String shortDescription,
+        String imgUrl,
         String description,
         Long basePriceCents,
         Long purchasePriceCents,

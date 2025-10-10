@@ -6,6 +6,7 @@ export default interface Product {
   sku: string;
   name: string;
   shortDescription: string;
+  imgUrl: string;
   description: string;
   basePriceCents: number;       
   purchasePriceCents: number;

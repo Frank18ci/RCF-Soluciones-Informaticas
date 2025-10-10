@@ -2,7 +2,8 @@ export interface ProductRequest {
   sku: string;                  
   name: string;                 
   shortDescription: string;     
-  description: string;          
+  description: string;       
+  image: File | null;   
   basePriceCents: number;       
   purchasePriceCents: number;   
   salePriceCents: number;       

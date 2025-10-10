@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDialog } from '../../components/dialog/product-dialog/product-dialog';
+import { RootImage } from '../../../shared/services/image-services/RootImage';
 
 @Component({
   selector: 'app-productos-page',
@@ -15,10 +16,10 @@ import { ProductDialog } from '../../components/dialog/product-dialog/product-di
   styleUrl: './productos-page.css'
 })
 export class ProductosPage implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['SKU', 'Nombre', 'Descripción corta', 'Precio (S/.)', 'Stock', 'Categoría', 'Activo', 'Acciones'];
+  displayedColumns: string[] = ['SKU', 'Nombre', 'Descripción corta', 'Imagen', 'Precio (S/.)', 'Stock', 'Categoría', 'Activo', 'Acciones'];
   dataSource = new MatTableDataSource<Product>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  rootImage = RootImage;
   constructor(private productService: ProductService, private dialog: MatDialog) {}
 
   ngAfterViewInit() {
@@ -45,25 +46,7 @@ export class ProductosPage implements OnInit, AfterViewInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        if(productDialogData.id){
-          this.productService.updateProduct(productDialogData.id, result).subscribe({
-              next: () => {
-                this.loadProductos();
-              },
-              error: (err) => {
-                console.error('Error al actualizar producto:', err);
-              }
-          });
-        } else {
-          this.productService.createProduct(result).subscribe({
-              next: () => {
-                  this.loadProductos();
-              },
-              error: (err) => {
-                  console.error('Error al crear producto:', err);
-              }
-          });
-        }
+        this.loadProductos();
       }
     });
   }

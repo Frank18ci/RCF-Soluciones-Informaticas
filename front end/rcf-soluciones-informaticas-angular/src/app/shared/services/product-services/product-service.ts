@@ -19,10 +19,10 @@ export class ProductService {
     const url = `${this.apiUrl}/${this.domain}/${id}`;
     return this.http.get<Product>(url);
   }
-  createProduct(product: ProductRequest): Observable<Product> {
+  createProduct(product: FormData): Observable<Product> {
     return this.http.post<Product>(`${this.apiUrl}/${this.domain}`, product);
   }
-  updateProduct(id: number, product: ProductRequest): Observable<Product> {
+  updateProduct(id: number, product: FormData): Observable<Product> {
     const url = `${this.apiUrl}/${this.domain}/${id}`;
     return this.http.put<Product>(url, product);
   }
