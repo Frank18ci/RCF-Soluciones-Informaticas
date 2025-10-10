@@ -9,6 +9,16 @@ spring:
         enabled: true
         register: true
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://host.docker.internal:8086"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders: "*"
       server:
         webmvc:
           routes:
