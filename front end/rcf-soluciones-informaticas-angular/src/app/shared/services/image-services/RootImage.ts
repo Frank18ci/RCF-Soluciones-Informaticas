@@ -1,0 +1,1 @@
+export const RootImage: String = "http://localhost:8080/products/products/imagen/";

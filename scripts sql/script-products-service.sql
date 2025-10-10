@@ -1,4 +1,3 @@
-
 DROP DATABASE IF EXISTS RCF_SOLUCIONES_INFORMATICAS_PRODUCTS_SERVICE;
 CREATE DATABASE RCF_SOLUCIONES_INFORMATICAS_PRODUCTS_SERVICE;
 use RCF_SOLUCIONES_INFORMATICAS_PRODUCTS_SERVICE;
@@ -62,6 +61,7 @@ CREATE TABLE products (
   sku VARCHAR(100) NOT NULL UNIQUE,
   name VARCHAR(150) NOT NULL,
   short_description VARCHAR(255) NULL,
+  img_url varchar(255) null,
   description TEXT NULL,
   base_price_cents BIGINT NOT NULL,      -- precio base (ej. sin descuento ni impuestos)
   purchase_price_cents BIGINT NOT NULL,  -- precio de compra (costo)

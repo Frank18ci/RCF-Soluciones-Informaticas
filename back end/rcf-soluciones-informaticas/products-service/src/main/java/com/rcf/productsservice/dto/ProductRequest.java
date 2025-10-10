@@ -4,9 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Builder;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Builder
 public record ProductRequest(
@@ -16,6 +16,7 @@ public record ProductRequest(
         String name,
         @NotBlank(message = "shortDescription no puede estar vacio")
         String shortDescription,
+        MultipartFile image,
         @NotBlank(message = "description no pude estar vacio")
         String description,
         @NotNull(message = "basePriceCents no pude ser nulo")

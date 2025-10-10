@@ -28,6 +28,14 @@
                 <td mat-cell *matCellDef="let product"> {{product.shortDescription}} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="Imagen">
+                <th mat-header-cell *matHeaderCellDef> Imagen </th>
+                <td mat-cell *matCellDef="let product"> 
+                    <img *ngIf="product.imgUrl" [src]="rootImage + product.imgUrl" alt="Imagen del producto" class="w-16 h-16 object-cover rounded-md">
+                    <span *ngIf="!product.imgUrl" class="text-gray-500">No hay imagen</span>
+                </td>
+                </ng-container>
+
                 <ng-container matColumnDef="Precio (S/.)">
                 <th mat-header-cell *matHeaderCellDef> Precio (S/.) </th>
                 <td mat-cell *matCellDef="let product"> {{ product.salePriceCents / 100 | currency:'PEN':'symbol':'1.2-2' }} </td>

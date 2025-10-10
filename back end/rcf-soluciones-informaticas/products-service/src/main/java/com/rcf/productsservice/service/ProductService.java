@@ -8,7 +8,8 @@ import java.util.List;
 public interface ProductService {
     List <ProductResponse> getAllProducts();
     ProductResponse getProductById (Long id);
-    ProductResponse createProduct (ProductRequest productRequest);
+    ProductResponse createProduct (ProductRequest productRequest) throws Exception;
     ProductResponse updateProduct (Long id, ProductRequest productRequest);
     void deleteProduct (Long id);
+
 }

@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{productId ? 'Editar' : 'Agregar'}} Producto</h2>
 <div mat-dialog-content class="bg-gray-50 rounded-xl p-6 shadow-sm">
-  <form class="grid grid-cols-1 md:grid-cols-2 gap-6" [formGroup]="form">
+  <form class="grid grid-cols-1 md:grid-cols-2 gap-6" [formGroup]="form" enctype="multipart/form-data">
     <!-- Columna izquierda -->
     <div class="flex flex-col gap-4">
       <mat-form-field class="w-full *:px-3">
@@ -68,7 +68,7 @@
         <mat-select formControlName="discountId" name="discountId">
           <mat-option [value]="0">Sin descuento</mat-option>
           <mat-option *ngFor="let discount of discounts" [value]="discount.id">
-            {{ discount.name }} - {{ discount.value }}%
+            {{ discount.code }} - {{ discount.value }}%
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -80,6 +80,14 @@
           <mat-option [value]="false">No</mat-option>
         </mat-select>
       </mat-form-field>
+
+      <div class="w-full *:px-3 mb-4 col-span-2 mat-elevation-z1 rounded-md border border-gray-300 p-3 bg-gray-300">
+        <label class="mat-label text-sm font-medium text-gray-700">Imagen</label>
+        <input type="file" accept="image/*" (change)="onFileSelected($event)"  name="image" class="mt-2 block w-full text-sm" />
+        <p *ngIf="nombreImagen" class="text-xs text-gray-500 mt-1">
+          Archivo seleccionado: {{ nombreImagen }}
+        </p>
+      </div>
     </div>
   </form>
 </div>

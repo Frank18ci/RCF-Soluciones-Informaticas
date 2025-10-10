@@ -6,6 +6,7 @@ import com.rcf.productsservice.exception.ResourceNotFound;
 import com.rcf.productsservice.model.Product;
 import com.rcf.productsservice.repository.ProductRepository;
 import com.rcf.productsservice.service.ProductService;
+import com.rcf.productsservice.storage.ImageStorageService;
 import com.rcf.productsservice.util.ProductMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final ImageStorageService imageStorageService;
 
     @Override
     public List<ProductResponse> getAllProducts() {
@@ -32,35 +34,53 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse createProduct(ProductRequest productRequest) {
-        Product product = productMapper.toEntity(productRequest);
+        Product product = productMapper.toEntity(productRequest, productRequest.sku());
+
         if(productRequest.discountId() != null && productRequest.discountId() > 0) {
-            product.setDiscount(productMapper.toEntity(productRequest).getDiscount());
+            product.setDiscount(productMapper.toEntity(productRequest, productRequest.sku()).getDiscount());
         } else {
             product.setDiscount(null);
         }
+
+        try{
+            imageStorageService.saveImage(productRequest.image(), product.getSku());
+        } catch (Exception e) {
+            throw new RuntimeException("Could not store the image. Error: " + e.getMessage());
+        }
+
         return productMapper.toDto(productRepository.save(product));
     }
 
     @Override
     public ProductResponse updateProduct(Long id, ProductRequest productRequest) {
+        Product productConverter = productMapper.toEntity(productRequest, productRequest.sku());
         Product productFound = productRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFound("Product not found with id: " + id)
         );
         productFound.setSku(productRequest.sku());
         productFound.setName(productRequest.name());
         productFound.setShortDescription(productRequest.shortDescription());
+        productFound.setImgUrl(productConverter.getImgUrl());
         productFound.setDescription(productRequest.description());
         productFound.setBasePriceCents(productRequest.basePriceCents());
         productFound.setPurchasePriceCents(productRequest.purchasePriceCents());
         productFound.setSalePriceCents(productRequest.salePriceCents());
         productFound.setTaxRate(productRequest.taxRate());
         productFound.setStock(productRequest.stock());
-        productFound.setCategory(productMapper.toEntity(productRequest).getCategory());
+        productFound.setCategory(productConverter.getCategory());
+
         if(productRequest.discountId() != null && productRequest.discountId() > 0) {
-            productFound.setDiscount(productMapper.toEntity(productRequest).getDiscount());
+            productFound.setDiscount(productConverter.getDiscount());
         } else {
             productFound.setDiscount(null);
         }
+
+        try{
+            imageStorageService.saveImage(productRequest.image(), productFound.getSku());
+        } catch (Exception e) {
+            throw new RuntimeException("Could not store the image. Error: " + e.getMessage());
+        }
+
         productFound.setActive(productRequest.active());
         return productMapper.toDto(productRepository.save(productFound));
     }
