@@ -6,6 +6,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import Service from '../../../shared/model/Service';
 import { ServiceService } from '../../../shared/services/service-services/service-service';
 import { MatDialog } from '@angular/material/dialog';
+import { ServiceDialog } from '../../components/dialog/service-dialog/service-dialog';
 
 @Component({
   selector: 'app-servicios-page',
@@ -35,7 +36,29 @@ export class ServiciosPage implements OnInit, AfterViewInit{
     });
   }
   openDialog(service?: Service) {
-    // Implementation for opening a dialog to add/edit a service
+    let serviceDialogData: any = {};
+    if (service) {
+      serviceDialogData = { ...service };
+    }
+    const dialogRef = this.dialog.open(ServiceDialog, {
+      width: '700px',
+      data: service ? serviceDialogData : {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (serviceDialogData.id) {
+          this.serviceService.updateService(serviceDialogData.id, result).subscribe({
+            next: () => this.loadServices(),
+            error: (err) => console.error('Error updating service:', err)
+          });
+        } else {
+          this.serviceService.saveService(result).subscribe({
+            next: () => this.loadServices(),
+            error: (err) => console.error('Error creating service:', err)
+          });
+        }
+      }
+    });
   }
   verServicio(serviceId: number) {
     // Implementation for viewing service details

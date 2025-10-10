@@ -21,6 +21,8 @@ public record ServiceRequest(
         @NotNull(message = "durationMinutes no puede ser nulo")
         Integer durationMinutes,
         @NotNull(message = "requiresOnSite no puede ser nulo")
-        Boolean requiresOnSite
+        Boolean requiresOnSite,
+        @NotNull(message = "active no puede ser nulo")
+        Boolean active
 ) {
 }

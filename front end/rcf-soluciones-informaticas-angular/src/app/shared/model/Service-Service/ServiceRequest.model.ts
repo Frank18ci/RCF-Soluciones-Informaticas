@@ -6,4 +6,5 @@ export default interface ServiceRequest {
     taxRate: number;
     durationMinutes: number;
     requiresOnSite: boolean;
+    active: boolean;
 }
