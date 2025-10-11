@@ -1,0 +1,9 @@
+.drawer-container {
+  height: 100%;
+}
+
+.drawer {
+  width: 350px;
+  background: #fff;
+  padding: 1rem;
+}

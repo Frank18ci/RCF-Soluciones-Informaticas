@@ -5,6 +5,7 @@ import { LayoutPage } from './pages/layout-page/layout-page';
 import { ContactanosPage } from './pages/contactanos-page/contactanos-page';
 import { ProductosPage } from './pages/productos-page/productos-page';
 import { ServiciosPage } from './pages/servicios-page/servicios-page';
+import { ProductDetail } from './components/product-detail/product-detail';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'productos',
         component: ProductosPage
+      },
+      {
+        path: 'productos/:id',
+        component: ProductDetail,
       },
       {
         path: 'servicios',

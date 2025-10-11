@@ -1,0 +1,15 @@
+<div class="p-4">
+  <h2 class="text-xl font-semibold mb-4">🛒 Carrito</h2>
+  @for(product of products; track product.id) {
+    <div class="flex items-center justify-between mb-4 border-b pb-2">
+      <div>
+        <h3 class="font-medium">{{ product.name }}</h3>
+        <p class="text-sm text-gray-600">Cantidad: {{ getProductQuantity(product.id) }}</p>
+      </div>
+      <p class="font-semibold">S/. {{ (product.basePriceCents / 100) | number:'1.2-2' }}</p>
+    </div>
+  }
+  <button mat-stroked-button color="warn" class="mt-6 w-full" (click)="closeDrawer()">
+    Cerrar
+  </button>
+</div>

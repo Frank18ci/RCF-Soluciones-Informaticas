@@ -58,4 +58,9 @@ public class ProductController {
                 .contentType(MediaType.parseMediaType(contentType))
                 .body(resource);
     }
+
+    @GetMapping("search")
+    public ResponseEntity<?> searchProducts(@RequestParam String name, @RequestParam Long categoryId, @RequestParam Long minPrice, @RequestParam Long maxPrice) {
+        return ResponseEntity.ok(productService.searchProducts(name, categoryId, minPrice, maxPrice));
+    }
 }
