@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Topbar } from '../topbar/topbar';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -14,20 +14,22 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './header.css'
 })
 export class Header implements OnInit, OnDestroy {
-   showTopbar: Observable<boolean> = new BehaviorSubject(false);
+   showTopbar!: Observable<boolean>;
+   scrollSub!: Subscription;
+  @Output() openCart = new EventEmitter<void>();
 
 
   ngOnInit() {
     this.showTopbar = fromEvent(window, 'scroll').pipe(
       throttleTime(50),
-      map(() => window.scrollY > 100),
-      startWith(window.scrollY > 100)
+      map(() => window.scrollY < 100),
+      startWith(true) 
     );
-    
   }
   ngOnDestroy() {
-    
+        this.scrollSub?.unsubscribe();
   }
+
   isMenuOpen = false;
   cartCount = 0;
   q = '';
@@ -40,8 +42,5 @@ export class Header implements OnInit, OnDestroy {
     this.isMenuOpen = false;
   }
 
-  toggleCart() {
-    // TODO: abre mini-carrito/drawer
-    console.log('Abrir carrito');
-  }
+  
 }

@@ -92,4 +92,15 @@ public class ProductServiceImpl implements ProductService {
         );
         productRepository.delete(productFound);
     }
+
+    @Override
+    public List<ProductResponse> searchProducts(String name, Long categoryId, Long minPrice, Long maxPrice) {
+        List<ProductResponse> products;
+        if(categoryId == 0){
+            products = productMapper.toDtoList(productRepository.findByNameContainingAndSalePriceCentsBetween(name, minPrice, maxPrice));
+        } else {
+            products = productMapper.toDtoList(productRepository.findByNameContainingAndCategory_IdAndSalePriceCentsBetween(name, categoryId, minPrice, maxPrice));
+        }
+        return products;
+    }
 }

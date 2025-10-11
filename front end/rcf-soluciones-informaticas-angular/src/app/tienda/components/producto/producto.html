@@ -1,0 +1,17 @@
+<div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div (click)="verDetalle(product.id)">
+        <img [src]="rootImage + product.imgUrl" alt="{{ product.name }}" class="w-full h-48 object-cover rounded-t" />
+    </div>
+    <div class="text-start p-4 space-y-2">
+        <h2 class="text-xl font-semibold">{{ product.name.length > 15 ? (product.name | slice:0:15) + '...' : product.name }}</h2>
+        <p class="text-gray-600">
+            {{ product.shortDescription.length > 20 ? (product.shortDescription | slice:0:20) + '...' : product.shortDescription }}
+        </p>
+        <p class=" text-gray-600 space-y-2">Precio: <span class="font-bold">{{ product.salePriceCents / 100 | currency:'PEN':'symbol':'1.2-2' }}</span></p>
+        <div class="w-full">
+            <button (click)="addToCart(product.id, 1)"
+                class="w-full bg-blue-300 text-blue-800 font-semibold hover:text-white px-4 py-2 rounded hover:bg-blue-600">Agregar
+                al Carrito</button>
+        </div>
+    </div>
+</div>

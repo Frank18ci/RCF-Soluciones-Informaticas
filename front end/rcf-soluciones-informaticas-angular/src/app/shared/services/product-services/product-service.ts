@@ -30,4 +30,13 @@ export class ProductService {
     const url = `${this.apiUrl}/${this.domain}/${id}`;
     return this.http.delete<void>(url);
   }
+
+  searchProducts(name: String = "", categoryId: number, minPrice: number, maxPrice: number): Observable<Product[]> {
+    const params = {} as any;
+    params.name = name;
+    params.categoryId = categoryId;
+    if (minPrice != null) params.minPrice = minPrice * 100;
+    if (maxPrice != null) params.maxPrice = maxPrice * 100;
+    return this.http.get<Product[]>(`${this.apiUrl}/${this.domain}/search`, { params });
+  }
 }
