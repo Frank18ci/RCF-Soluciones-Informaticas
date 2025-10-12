@@ -6,10 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MaterialModule } from '../../../shared/modules/material/material-module';
 import { BehaviorSubject, fromEvent, map, Observable, startWith, Subscription, throttleTime } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-header',
-  imports: [Topbar, FormsModule, RouterLink, MatIconModule, MaterialModule, AsyncPipe],
+  imports: [Topbar, FormsModule, RouterLink, MatIconModule, MaterialModule, AsyncPipe, MatButtonModule, MatMenuModule],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })

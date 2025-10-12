@@ -7,6 +7,9 @@ import { ProductosPage } from './pages/productos-page/productos-page';
 import { ServiciosPage } from './pages/servicios-page/servicios-page';
 import { ProductDetail } from './components/product-detail/product-detail';
 
+import { OrderDetail } from './pages/order-detail/order-detail';
+import { Orders } from './pages/orders/orders';
+
 const routes: Routes = [
   {
     path: '',
@@ -31,6 +34,14 @@ const routes: Routes = [
       {
         path: 'contactenos',
         component: ContactanosPage
+      },
+      {
+        path: 'ordenes',
+        component: Orders
+      },
+      {
+        path: 'ordenes/:id',
+        component: OrderDetail
       },
       {
         path: '**',

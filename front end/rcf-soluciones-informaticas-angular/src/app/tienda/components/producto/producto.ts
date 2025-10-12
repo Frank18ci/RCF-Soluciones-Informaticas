@@ -24,7 +24,7 @@ export class Producto {
     this.router.navigate(['/tienda/productos', productId]);
   }
   addToCart(productId: number, quantity: number = 1) {
-    this.carritoService.addToCart(productId, quantity);
+    this.carritoService.addToCart({id: this.product.id, quantity: quantity});
   }
 }
 
