@@ -60,4 +60,9 @@ public class ProductAttributeValueServiceImpl implements ProductAttributeValueSe
         );
         productAttributeValueRepository.delete(productAttributeValueFound);
     }
+
+    @Override
+    public List<ProductAttributeValueResponse> getProductAttributeValuesByProductId(Long productId) {
+        return productAttributeValueMapper.toDtoList(productAttributeValueRepository.findByProductId(productId));
+    }
 }

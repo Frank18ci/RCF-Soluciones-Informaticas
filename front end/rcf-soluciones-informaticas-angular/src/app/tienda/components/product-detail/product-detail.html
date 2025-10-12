@@ -1,1 +1,56 @@
-<p>product-detail works!</p>
+<div class="container mx-auto my-2">
+    <div class="flex gap-3 text-gray-600">
+      <a routerLink="/tienda/productos" class="cursor-pointer">Productos</a>
+      <span>/</span>
+      <span class="text-gray-700">Detalle Producto</span>
+    </div>
+    <div class="gap-12 flex justify-center mt-6">
+        @if(product){
+            <img [src]="rootImage + product.imgUrl" [alt]="product.name" class="size-96 object-cover rounded-lg shadow-md">
+        }
+        <div>
+            <div class="space-y-2">
+                <h3 class="text-gray-600">{{product.sku}}</h3>
+                <h2 class="text-gray-800 text-4xl">{{product.name}}</h2>
+                <p class="text-gray-600 mt-4">{{product.description}}</p>
+                <div class="mt-4">
+                    <span class="text-5xl text-gray-800 font-semibold">
+                        {{ (product.salePriceCents / 100) | currency:'PEN':'symbol':'1.2-2' }}
+                    </span>
+                </div>
+            </div>
+            <div class="flex gap-1 my-2 items-center">
+                <div class="text-yellow-400">
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                </div>
+                <div class="text-gray-300">
+                    <mat-icon>star</mat-icon>
+                </div>
+                <div>
+                    <span class="text-gray-600">(24 reseñas)</span>
+                </div>
+            </div>
+            <div class="flex gap-12 items-center">
+                <div>
+                    Cantidad
+                </div>
+                <div class="flex items-center border border-gray-300 rounded-md">
+                    <button (click)="decrementarCantidad()" class="p-1 text-lg font-black text-center px-4 flex">-</button>
+                    <input type="number" min="1" [value]="cantidad" class="w-16 border-s border-e border-gray-300 p-2">
+                    <button (click)="incrementarCantidad()" class="p-1 text-lg font-black px-4 flex">+</button>
+                </div>
+            </div>
+            <div class="mt-6">
+                <button (click)="addToCart()" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 flex items-center gap-2">
+                    <mat-icon class="align-middle">shopping_cart</mat-icon>
+                    Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+    <div class="my-6">
+        <h5 class="tex-5xl font-black">Detalles de Producto</h5>
+    </div>
+</div>

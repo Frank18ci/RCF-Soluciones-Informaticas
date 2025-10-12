@@ -11,4 +11,6 @@ public interface ProductAttributeValueService {
     ProductAttributeValueResponse createProductAttributeValue(ProductAttributeValueRequest request);
     ProductAttributeValueResponse updateProductAttributeValue(Long id, ProductAttributeValueRequest request);
     void deleteProductAttributeValue(Long id);
+
+    List<ProductAttributeValueResponse> getProductAttributeValuesByProductId(Long productId);
 }

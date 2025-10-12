@@ -21,6 +21,10 @@ public class ProductAttributeValueController {
     public ResponseEntity<?> getProductAttributeValueById(@PathVariable Long id) {
         return ResponseEntity.ok(productAttributeValueService.getProductAttributeValueById(id));
     }
+    @GetMapping("/product/{productId}")
+    public ResponseEntity<?> getProductAttributeValuesByProductId(@PathVariable Long productId) {
+        return ResponseEntity.ok(productAttributeValueService.getProductAttributeValuesByProductId(productId));
+    }
     @PostMapping
     public ResponseEntity<?> createProductAttributeValue(@RequestBody @Valid ProductAttributeValueRequest productAttributeValueRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productAttributeValueService.createProductAttributeValue(productAttributeValueRequest));
