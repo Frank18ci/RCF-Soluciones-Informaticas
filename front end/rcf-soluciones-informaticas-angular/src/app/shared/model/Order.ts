@@ -12,3 +12,5 @@ export default interface Order {
     discountCents: number;
     notes: string;
 }
+
+

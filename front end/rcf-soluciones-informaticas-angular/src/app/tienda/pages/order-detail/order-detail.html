@@ -1,3 +1,73 @@
-<div class="container mx-auto my-2">
-    holaa
+<div class="container mx-auto my-8 px-4">
+  <!-- Si hay una orden -->
+  <mat-card
+    class="order-detail-card p-6 rounded-2xl shadow-md border border-transparent hover:border-blue-600 transition-all duration-300 bg-white"
+    *ngIf="order"
+  >
+    <div class="mb-4">
+      <h2 class="text-3xl font-bold text-blue-700 mb-1">
+        Detalles de la Orden #{{ order.id }}
+      </h2>
+      <p class="text-gray-500">Información general de la compra realizada</p>
+    </div>
+
+    <mat-divider class="my-3"></mat-divider>
+
+    <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
+      <div>
+        <p><strong>ID Usuario:</strong> {{ order.userId }}</p>
+        <p><strong>Estado:</strong> 
+          <span
+            class="px-2 py-1 rounded-md text-sm font-semibold"
+            [ngClass]="{
+              'bg-green-100 text-green-700': order.orderStatus?.code === 'COMPLETADO',
+              'bg-yellow-100 text-yellow-700': order.orderStatus?.code === 'PENDIENTE',
+              'bg-red-100 text-red-700': order.orderStatus?.code === 'CANCELADO'
+            }"
+          >
+            {{ order.orderStatus?.code || 'Desconocido' }}
+          </span>
+        </p>
+        <p><strong>Método de Pago:</strong> {{ order.paymentMethodCode }}</p>
+        <p><strong>Moneda:</strong> {{ order.currencyCode }}</p>
+      </div>
+
+      <div>
+        <p><strong>Subtotal:</strong> {{ formatCurrency(order.subtotalCents, order.currencyCode) }}</p>
+        <p><strong>Impuesto:</strong> {{ formatCurrency(order.taxTotalCents, order.currencyCode) }}</p>
+        <p><strong>Descuento:</strong> {{ formatCurrency(order.discountCents, order.currencyCode) }}</p>
+        <p class="text-xl font-semibold text-blue-700">
+          <strong>Total:</strong> {{ formatCurrency(order.totalCents, order.currencyCode) }}
+        </p>
+      </div>
+    </div>
+
+    <mat-divider class="my-4"></mat-divider>
+
+    <div>
+      <p><strong>Notas:</strong></p>
+      <p class="text-gray-700 italic">{{ order.notes || 'Sin notas adicionales.' }}</p>
+    </div>
+
+    <div class="flex justify-end mt-6">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="dialogRef.close()"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-all duration-300"
+      >
+        Cerrar
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- Si no hay orden seleccionada -->
+  <div
+    *ngIf="!order"
+    class="text-center text-gray-600 my-8 p-8 border border-gray-200 rounded-2xl shadow-sm bg-gray-50"
+  >
+    <mat-icon class="text-5xl text-gray-400 mb-3">info</mat-icon>
+    <p class="text-lg font-medium">No se ha seleccionado ninguna orden.</p>
+    <p class="text-sm text-gray-500">Selecciona una orden en la lista para ver sus detalles.</p>
+  </div>
 </div>

@@ -1,3 +1,102 @@
 <div class="container mx-auto my-2">
-    holaa
+    <div class="ordenes-container">
+  <!-- ====== PARTE SUPERIOR: BOTONES ====== -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+    
+    <!-- Total -->
+    <button
+      mat-raised-button
+      (click)="filtrarPorEstado('TODAS')"
+      class="p-6 w-full rounded-lg shadow-md bg-blue-50 hover:bg-blue-100 transition-all duration-300 flex flex-col items-center justify-center">
+      <h3 class="text-3xl font-bold text-blue-600">{{ totalOrdenes }}</h3>
+      <h6 class="text-gray-700 font-medium">Total de Órdenes</h6>
+    </button>
+
+    <!-- En proceso -->
+    <button
+      mat-raised-button
+      (click)="filtrarPorEstado('PENDING')"
+      class="p-6 w-full rounded-lg shadow-md bg-yellow-50 hover:bg-yellow-100 transition-all duration-300 flex flex-col items-center justify-center">
+      <h3 class="text-3xl font-bold text-yellow-600">{{ ordenesProcesando }}</h3>
+      <h6 class="text-gray-700 font-medium">En Progreso</h6>
+    </button>
+
+    <!-- Finalizadas -->
+    <button
+      mat-raised-button
+      (click)="filtrarPorEstado('COMPLETED')"
+      class="p-6 w-full rounded-lg shadow-md bg-green-50 hover:bg-green-100 transition-all duration-300 flex flex-col items-center justify-center">
+      <h3 class="text-3xl font-bold text-green-600">{{ ordenesFinalizadas }}</h3>
+      <h6 class="text-gray-700 font-medium">Finalizadas</h6>
+    </button>
+
+    <!-- Canceladas -->
+    <button
+      mat-raised-button
+      (click)="filtrarPorEstado('CANCELLED')"
+      class="p-6 w-full rounded-lg shadow-md bg-red-50 hover:bg-red-100 transition-all duration-300 flex flex-col items-center justify-center">
+      <h3 class="text-3xl font-bold text-red-600">{{ ordenesCanceladas }}</h3>
+      <h6 class="text-gray-700 font-medium">Canceladas</h6>
+    </button>
+  </div>
+
+  <!-- ====== PARTE INFERIOR: TABLA ====== -->
+  <div class="ordenes-tabla">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let order"> {{ order.id }} </td>
+      </ng-container>
+
+      <!-- Cliente -->
+      <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef> Nota </th>
+        <td mat-cell *matCellDef="let order"> {{ order.notes }} </td>
+      </ng-container>
+
+      <!-- Fecha -->
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td mat-cell *matCellDef="let order"> {{ order.createdAt | date:'short' }} </td>
+      </ng-container>
+
+      <!-- Total -->
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef> Total (S/.) </th>
+        <td mat-cell *matCellDef="let order"> {{ order.totalCents | number:'1.2-2' }} </td>
+      </ng-container>
+
+      <!-- Estado -->
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let order">
+          <span [ngClass]="{
+              'estado-proceso': order.orderStatus.code === 'PENDING',
+              'estado-finalizada': order.orderStatus.code === 'COMPLETED',
+              'estado-cancelada': order.orderStatus.code === 'CANCELLED'
+            }">{{ order.orderStatus.code }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Acciones -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let order">
+          <button mat-icon-button color="primary" (click)="verDetalles(order)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+  </div>
+</div>
+
 </div>
