@@ -1,0 +1,15 @@
+.btnUser {
+    color: #c2410c !important;
+    transition: all 0.2s;
+}
+.btnUser:hover {
+    background-color: #fff7ed !important;
+}
+.btnUser:active {
+    background-color: #ffedd5 !important;
+}
+.btnUser:focus-visible {
+    outline: 2px solid #f97316 !important;
+    outline-offset: 2px !important;
+}
+

@@ -51,11 +51,15 @@
             <!-- Derecha: acciones -->
             <div class="flex items-center gap-1.5">
                 <!-- Cuenta -->
-                <a routerLink="/mi-cuenta"
-                    class="hidden sm:inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-orange-700 hover:bg-orange-50 active:bg-orange-100 focus-visible:outline focus-visible:outline-orange-500 transition">
-                    <mat-icon>account_circle</mat-icon>
-                    <span class="hidden lg:inline">Mi cuenta</span>
-                </a>
+                <div class="hidden sm:inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-orange-700 hover:bg-orange-50 active:bg-orange-100 focus-visible:outline focus-visible:outline-orange-500 transition">
+                    <button matButton [matMenuTriggerFor]="menuUser" class="btnUser">
+                        <mat-icon>account_circle</mat-icon>
+                        <span class="hidden lg:inline">Mi cuenta</span>
+                    </button>
+                    <mat-menu #menuUser="matMenu">
+                        <a routerLink="/tienda/ordenes" mat-menu-item>Ordenes</a>
+                    </mat-menu>
+                </div>
 
                 <!-- Carrito -->
                 <button type="button"

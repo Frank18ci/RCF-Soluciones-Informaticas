@@ -1,15 +1,40 @@
 <div class="p-4">
   <h2 class="text-xl font-semibold mb-4">🛒 Carrito</h2>
-  @for(product of products; track product.id) {
-    <div class="flex items-center justify-between mb-4 border-b pb-2">
-      <div>
-        <h3 class="font-medium">{{ product.name }}</h3>
-        <p class="text-sm text-gray-600">Cantidad: {{ getProductQuantity(product.id) }}</p>
+  @for(cartItem of cartItems; track cartItem.product.id) {
+    <div class="flex flex-col items-center justify-between mb-4 border-b pb-2">
+      <div class="flex items-center justify-between w-full">
+        <div>
+        <img [src]="rootImage + cartItem.product.imgUrl" alt=" {{ cartItem.product.name }}" class="size-10 object-cover rounded-md mr-4" />
       </div>
-      <p class="font-semibold">S/. {{ (product.basePriceCents / 100) | number:'1.2-2' }}</p>
-    </div>
+      <div>
+        <h3 class="font-medium">{{ cartItem.product.name.length > 10 ? (cartItem.product.name | slice:0:10) + '...' : cartItem.product.name }}</h3>
+        <p class="text-sm text-gray-600">Cantidad: {{ getProductQuantity(cartItem.product.id) }}</p>
+      </div>
+        <div>
+          <p class="font-semibold">S/. {{ (cartItem.product.basePriceCents / 100) | number:'1.2-2' }}</p>
+        </div>
+      </div>
+        <div class="flex justify-end w-full gap-2 mt-2">
+        <button mat-icon-button color="primary" (click)="incrementQuantity(cartItem.product.id)">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="decrementQuantity(cartItem.product.id)">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteProduct(cartItem.product.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      </div>
+      
   }
-  <button mat-stroked-button color="warn" class="mt-6 w-full" (click)="closeDrawer()">
-    Cerrar
+  <div class="pt-4 mt-4 text-right font-bold">
+    Total: S/. {{ getTotalPrice() | number:'1.2-2' }}
+  </div>
+  <button
+    mat-raised-button color="primary" class="mt-4 w-full"
+    (click)="crearOrden()"
+  >
+    Crear Orden
   </button>
 </div>
