@@ -43,4 +43,8 @@ export class CarritoService {
   private saveToStorage(cart: any[]) {
     localStorage.setItem('cart', JSON.stringify(cart));
   }
+  clearCart() {
+    localStorage.removeItem('cart');
+    this.cartSubject.next([]);
+  }
 }

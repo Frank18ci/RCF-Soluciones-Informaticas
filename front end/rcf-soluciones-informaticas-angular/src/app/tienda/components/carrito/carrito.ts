@@ -9,6 +9,12 @@ import { ProductService } from '../../../shared/services/product-services/produc
 import Product from '../../../shared/model/Product';
 import { RootImage } from '../../../shared/services/image-services/RootImage';
 import { MatIconModule } from '@angular/material/icon';
+import { OrderService } from '../../../shared/services/order-services/order-service';
+import { OrderItemService } from '../../../shared/services/order-item-service';
+import Order from '../../../shared/model/Order';
+import OrderRequest from '../../../shared/model/Orders-Services/OrderRequest.model';
+import { OrderItem } from '../../../shared/model/OrderItem';
+import OrderItemRequest from '../../../shared/model/Orders-Services/OrderItemRequest.model';
 
 @Component({
   selector: 'app-carrito',
@@ -24,7 +30,9 @@ export class Carrito implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private carritoService: CarritoService,
-    private productService: ProductService
+    private productService: ProductService,
+    private orderService: OrderService,
+    private orderItemService: OrderItemService
   ) {}
 
   ngAfterViewInit() {
@@ -130,6 +138,37 @@ export class Carrito implements OnInit, AfterViewInit, OnDestroy {
     this.cartSub?.unsubscribe();
   }
   crearOrden() {
-    console.log('Orden creada con los siguientes items:', this.cartItems);
+    const order: OrderRequest= {
+      currencyCode: 'PEN',
+      notes: 'Orden creada desde el carrito',
+      userId: 1, // Change when auth is implemented
+      orderStatusId: 1, // Pending status, change as needed
+      discountCents: 0,
+      taxTotalCents: 0,
+      totalCents: Math.round(this.getTotalPrice() * 100),
+      subtotalCents: Math.round(this.getTotalPrice() * 100),
+      paymentMethodCode: 'CARD'
+    }
+    this.orderService.createOrder(order).subscribe((createdOrder: Order) => {
+      console.log('Orden creada:', createdOrder);
+      this.cartItems.forEach(ci => {
+            const orderItem: OrderItemRequest = {
+              productId: ci.product.id,
+              qty: ci.quantity,
+              serviceId: 0,
+              orderId: createdOrder.id,
+              discountLineCents: 0,
+              taxRate: 0,
+              unitPriceCents: ci.product.salePriceCents ?? 0,
+              totalLineCents: (ci.product.salePriceCents ?? 0) * ci.quantity
+            };
+            this.orderItemService.createOrderItem(orderItem).subscribe(() => {
+              console.log('Item de orden creado para producto:', ci.product.id);
+            });
+          });      
+      // Limpiar el carrito después de crear la orden
+      this.carritoService.clearCart();
+      this.closeDrawer();
+    });
   }
 }

@@ -5,9 +5,7 @@
       <span class="text-gray-700">Detalle Producto</span>
     </div>
     <div class="gap-12 flex justify-center mt-6">
-        @if(product){
-            <img [src]="rootImage + product.imgUrl" [alt]="product.name" class="size-96 object-cover rounded-lg shadow-md">
-        }
+        <img [src]="rootImage + product.imgUrl" [alt]="product.name" class="size-96 object-cover rounded-lg shadow-md">
         <div>
             <div class="space-y-2">
                 <h3 class="text-gray-600">{{product.sku}}</h3>
@@ -51,6 +49,22 @@
         </div>
     </div>
     <div class="my-6">
-        <h5 class="tex-5xl font-black">Detalles de Producto</h5>
+        <h5 class="text-3xl font-black my-4">Detalles de Producto</h5>
+        <mat-divider></mat-divider>
+        <div class="my-4 space-y-4">
+            <h6 class="text-2xl font-bold">Descripción</h6>
+            <p class="text-gray-600">{{ product.description }}</p>
+            <div>
+                <div class="text-2xl font-bold">
+                    Especificaciones
+                </div>
+                @for(productAttributeValue of productAttributeValues; track productAttributeValue.id){
+                    <div class="grid grid-cols-3 border-b border-gray-200 py-2">
+                        <span class="text-gray-600">{{ productAttributeValue.productAttribute.code }}</span>
+                        <span class="text-gray-800 font-semibold">{{ productAttributeValue.value }}</span>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </div>
