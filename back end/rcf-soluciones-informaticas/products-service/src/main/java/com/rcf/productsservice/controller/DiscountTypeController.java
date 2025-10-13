@@ -34,4 +34,5 @@ public class DiscountTypeController {
         discountTypeService.deleteDiscountType(id);
         return ResponseEntity.noContent().build();
     }
+
 }

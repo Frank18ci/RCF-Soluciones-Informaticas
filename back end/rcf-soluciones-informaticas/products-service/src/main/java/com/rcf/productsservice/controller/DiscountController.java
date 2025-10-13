@@ -35,4 +35,8 @@ public class DiscountController {
         discountService.deleteDiscount(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/search")
+    public ResponseEntity<?> searchDiscounts(@RequestParam String code) {
+        return ResponseEntity.ok(discountService.searchDiscountsByCode(code));
+    }
 }

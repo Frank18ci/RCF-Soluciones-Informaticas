@@ -75,4 +75,13 @@ export class ClientesPage implements OnInit, AfterViewInit {
       });
     }
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.buscarUsuarioPorEmail(filterValue.trim().toLowerCase());
+  }
+  buscarUsuarioPorEmail(email: string) {
+    this.userService.getUserByEmail(email).subscribe(usuario => {
+      this.dataSource.data = usuario;
+    });
+  }
 }

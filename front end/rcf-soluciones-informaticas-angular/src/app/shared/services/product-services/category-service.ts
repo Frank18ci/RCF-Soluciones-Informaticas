@@ -27,4 +27,7 @@ export class CategoryService {
   deleteCategory(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${this.domain}/${id}`);
   }
+  getCategoriesByName(name: string): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.apiUrl}/${this.domain}/search?name=${name}`);
+  }
 }

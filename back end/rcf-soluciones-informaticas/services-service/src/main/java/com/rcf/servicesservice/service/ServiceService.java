@@ -12,4 +12,6 @@ public interface ServiceService {
     ServiceResponse createService(ServiceRequest serviceRequest);
     ServiceResponse updateService(Long id, ServiceRequest serviceRequest);
     void deleteService(Long id);
+
+    List<ServiceResponse> searchServicesByName(String name);
 }

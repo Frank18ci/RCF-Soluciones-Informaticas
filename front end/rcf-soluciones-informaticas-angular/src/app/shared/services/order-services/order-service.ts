@@ -27,4 +27,7 @@ export class OrderService {
   deleteOrder(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${this.domain}/${id}`);
   }
+  getOrdersByOrderStatusCode(code: string): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}/${this.domain}/search?code=${code}`);
+  }
 }

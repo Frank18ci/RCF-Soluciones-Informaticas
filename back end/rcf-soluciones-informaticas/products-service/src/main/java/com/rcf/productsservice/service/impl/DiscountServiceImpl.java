@@ -56,4 +56,9 @@ public class DiscountServiceImpl implements DiscountService {
         discountRepository.delete(discountFount);
 
     }
+
+    @Override
+    public List<DiscountResponse> searchDiscountsByCode(String code) {
+        return discountMapper.toDtoList(discountRepository.findAllByCodeContaining(code));
+    }
 }

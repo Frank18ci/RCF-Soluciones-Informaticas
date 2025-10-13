@@ -20,7 +20,7 @@ export class ProductosPage implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Product>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   rootImage = RootImage;
-  constructor(private productService: ProductService, private dialog: MatDialog) {}
+  constructor(private productService: ProductService, private dialog: MatDialog) { }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -29,7 +29,7 @@ export class ProductosPage implements OnInit, AfterViewInit {
   ngOnInit() {
     this.loadProductos();
   }
-  loadProductos(){
+  loadProductos() {
     this.productService.getProducts().subscribe(products => {
       this.dataSource.data = products;
     });
@@ -37,8 +37,8 @@ export class ProductosPage implements OnInit, AfterViewInit {
 
   openDialog(product?: Product) {
     let productDialogData: any = {};
-    if(product){
-      productDialogData = { ...product }; 
+    if (product) {
+      productDialogData = { ...product };
     }
     const dialogRef = this.dialog.open(ProductDialog, {
       width: '700px',
@@ -58,6 +58,16 @@ export class ProductosPage implements OnInit, AfterViewInit {
   deleteProduct(productId: number) {
     this.productService.deleteProduct(productId).subscribe(() => {
       this.loadProductos();
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.buscarProductoPorNombre(filterValue.trim().toLowerCase());
+  }
+  buscarProductoPorNombre(name: string) {
+    this.productService.searchProductsByName(name).subscribe(products => {
+      this.dataSource.data = products;
     });
   }
 }

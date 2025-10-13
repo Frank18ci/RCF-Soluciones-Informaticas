@@ -30,6 +30,10 @@ export class ProductService {
     const url = `${this.apiUrl}/${this.domain}/${id}`;
     return this.http.delete<void>(url);
   }
+  searchProductsByName(name: string): Observable<Product[]> {
+    const params = { name: name };
+    return this.http.get<Product[]>(`${this.apiUrl}/${this.domain}/search2`, { params });
+  }
 
   searchProducts(name: String = "", categoryId: number, minPrice: number, maxPrice: number): Observable<Product[]> {
     const params = {} as any;

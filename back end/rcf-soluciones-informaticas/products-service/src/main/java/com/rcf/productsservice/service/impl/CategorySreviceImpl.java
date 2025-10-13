@@ -64,4 +64,9 @@ public class CategorySreviceImpl implements CategorySrevice {
         );
         categoryRepository.delete(categoryFound);
     }
+
+    @Override
+    public List<CategoryResponse> searchCategoriesByName(String name) {
+        return categoryMapper.toDtoList(categoryRepository.findByNameContaining(name));
+    }
 }

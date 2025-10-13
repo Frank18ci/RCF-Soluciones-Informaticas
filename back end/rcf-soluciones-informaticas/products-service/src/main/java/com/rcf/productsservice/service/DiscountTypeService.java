@@ -11,4 +11,5 @@ public interface DiscountTypeService {
     DiscountTypeResponse saveDiscountType(DiscountTypeRequest discountTypeRequest);
     DiscountTypeResponse updateDiscountType(Long id, DiscountTypeRequest discountTypeRequest);
     void deleteDiscountType(Long id);
+
 }

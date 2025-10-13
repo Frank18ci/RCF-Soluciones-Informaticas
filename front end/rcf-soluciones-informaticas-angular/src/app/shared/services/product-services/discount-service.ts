@@ -27,4 +27,8 @@ export class DiscountService {
   deleteDiscount(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${this.domain}/${id}`);
   }
+  getDiscountsByCode(code: string): Observable<Discount[]> {
+    const params = { code: code };
+    return this.http.get<Discount[]>(`${this.apiUrl}/${this.domain}/search`, { params });
+  }
 }

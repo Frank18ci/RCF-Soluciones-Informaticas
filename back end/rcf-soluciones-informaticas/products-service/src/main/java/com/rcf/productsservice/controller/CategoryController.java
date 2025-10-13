@@ -35,5 +35,9 @@ public class CategoryController {
         categorySrevice.deleteCategory(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/search")
+    public ResponseEntity<?> searchCategories(@RequestParam String name) {
+        return ResponseEntity.ok(categorySrevice.searchCategoriesByName(name));
+    }
 
 }

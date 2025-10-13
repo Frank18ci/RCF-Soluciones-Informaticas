@@ -34,4 +34,8 @@ public class OrderController {
         orderService.deleteOrder(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/search")
+    public ResponseEntity<?> searchOrders(@RequestParam String code){
+        return ResponseEntity.ok(orderService.searchOrdersByEstadoOrder(code));
+    }
 }
