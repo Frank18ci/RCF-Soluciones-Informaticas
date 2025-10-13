@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByNameContainingAndCategory_IdAndSalePriceCentsBetween(String name, Long categoryId, Long salePriceCentsAfter, Long salePriceCentsBefore);
     List<Product> findByNameContainingAndSalePriceCentsBetween(String name, Long salePriceCentsAfter, Long salePriceCentsBefore);
+    List<Product> findByNameContaining(String name);
 }

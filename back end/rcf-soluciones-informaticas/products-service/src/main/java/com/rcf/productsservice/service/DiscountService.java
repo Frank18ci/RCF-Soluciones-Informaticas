@@ -9,4 +9,6 @@ public interface DiscountService {
     DiscountResponse createDiscount(DiscountRequest discountRequest);
     DiscountResponse updateDiscount(Long id, DiscountRequest discountRequest);
     void deleteDiscount(Long id);
+
+    List <DiscountResponse> searchDiscountsByCode(String code);
 }

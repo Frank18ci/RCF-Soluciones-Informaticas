@@ -27,4 +27,7 @@ export class ServiceService {
   deleteService(id: number) : Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${this.domain}/${id}`);
   }
+  getServicesByName(name: string) : Observable<Service[]> {
+    return this.http.get<Service[]>(`${this.apiUrl}/${this.domain}/search?name=${name}`);
+  }
 }

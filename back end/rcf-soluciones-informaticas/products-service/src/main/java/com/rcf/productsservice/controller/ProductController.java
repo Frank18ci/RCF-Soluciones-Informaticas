@@ -63,4 +63,8 @@ public class ProductController {
     public ResponseEntity<?> searchProducts(@RequestParam String name, @RequestParam Long categoryId, @RequestParam Long minPrice, @RequestParam Long maxPrice) {
         return ResponseEntity.ok(productService.searchProducts(name, categoryId, minPrice, maxPrice));
     }
+    @GetMapping("search2")
+    public ResponseEntity<?> searchProducts2(@RequestParam String name) {
+        return ResponseEntity.ok(productService.searchProducts2(name));
+    }
 }

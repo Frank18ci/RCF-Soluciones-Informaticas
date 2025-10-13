@@ -1,7 +1,6 @@
 package com.rcf.ordersservice.service.impl;
 
 import com.rcf.ordersservice.client.UserClient;
-import com.rcf.ordersservice.client.dto.UserResponse;
 import com.rcf.ordersservice.dto.OrderRequest;
 import com.rcf.ordersservice.dto.OrderResponse;
 import com.rcf.ordersservice.exception.ResourceNotFound;
@@ -66,5 +65,10 @@ public class OrderServiceImpl implements OrderService {
                 () -> new ResourceNotFound("Order not found with id: " + id)
         );
         orderRepository.delete(orderFound);
+    }
+
+    @Override
+    public List<OrderResponse> searchOrdersByEstadoOrder(String code) {
+        return orderMapper.toDtoList(orderRepository.findByOrderStatus_CodeContaining(code));
     }
 }

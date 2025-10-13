@@ -70,5 +70,14 @@ export class OrdenesPage implements OnInit, AfterViewInit{
       });
     }
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.buscarOrdenesPorStatusCode(filterValue.trim().toLowerCase());
+  }
+  buscarOrdenesPorStatusCode(code: string) {
+    this.orderService.getOrdersByOrderStatusCode(code).subscribe(orders => {
+      this.dataSource.data = orders;
+    });
+  }
 }
 

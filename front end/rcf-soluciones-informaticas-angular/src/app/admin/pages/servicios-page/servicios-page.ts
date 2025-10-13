@@ -69,4 +69,14 @@ export class ServiciosPage implements OnInit, AfterViewInit{
       error: (err) => console.error('Error deleting service:', err)
     });
   }
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.buscarServicioPorNombre(filterValue.trim().toLowerCase());
+  }
+  buscarServicioPorNombre(name: string) {
+    this.serviceService.getServicesByName(name).subscribe(services => {
+      this.dataSource.data = services;
+    });
+  }
 }

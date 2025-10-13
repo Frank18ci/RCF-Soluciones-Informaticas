@@ -69,4 +69,14 @@ export class DescuentosPage implements OnInit, AfterViewInit{
   verDiscount(discount: Discount): void {
     console.log('View discount:', discount);
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.buscarDescuentoPorCodigo(filterValue.trim().toLowerCase());
+  }
+  buscarDescuentoPorCodigo(codigo: string) {
+    this.discountService.getDiscountsByCode(codigo).subscribe(descuentos => {
+      this.dataSource.data = descuentos;
+    });
+  }
 }

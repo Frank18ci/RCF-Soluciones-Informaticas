@@ -75,4 +75,9 @@ public class UserServiceImpl implements UserService {
         );
         userRepository.delete(userFound);
     }
+
+    @Override
+    public List<UserResponse> searchByEmail(String email) {
+        return userMapper.toDtoList(userRepository.findByEmailContainingIgnoreCase(email));
+    }
 }

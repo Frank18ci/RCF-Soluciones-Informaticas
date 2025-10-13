@@ -64,4 +64,9 @@ public class ServiceServiceImpl implements ServiceService {
         );
         serviceRepository.delete(serviceFound);
     }
+
+    @Override
+    public List<ServiceResponse> searchServicesByName(String name) {
+        return serviceMapper.toDtoList(serviceRepository.findByNameContaining(name));
+    }
 }

@@ -54,4 +54,6 @@ public class DiscountTypeServiceImpl implements DiscountTypeService {
         );
         discountTypeRepository.delete(discountTypeFound);
     }
+
+
 }

@@ -4,12 +4,12 @@ import com.rcf.productsservice.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    // Buscar categoría por nombre (opcional)
-    Optional<Category> findByName(String name);
+    List<Category> findByNameContaining(String name);
 
     // Buscar categoría por slug (opcional)
     Optional<Category> findBySlug(String slug);

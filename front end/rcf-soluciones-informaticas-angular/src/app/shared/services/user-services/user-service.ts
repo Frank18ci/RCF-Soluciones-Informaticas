@@ -27,4 +27,7 @@ export class UserService {
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${this.domain}/${id}`);
   }
+  getUserByEmail(email: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/${this.domain}/search?email=${email}`);
+  }
 }

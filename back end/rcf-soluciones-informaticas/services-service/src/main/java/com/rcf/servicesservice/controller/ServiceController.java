@@ -39,4 +39,8 @@ public class ServiceController {
         serviceService.deleteService(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/search")
+    public ResponseEntity<?> searchServices(@RequestParam String name) {
+        return ResponseEntity.ok(serviceService.searchServicesByName(name));
+    }
 }

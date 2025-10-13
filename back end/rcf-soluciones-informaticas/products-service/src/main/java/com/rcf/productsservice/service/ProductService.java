@@ -17,4 +17,6 @@ public interface ProductService {
     void deleteProduct(Long id);
 
     List<ProductResponse> searchProducts(String name, Long categoryId, Long minPrice, Long maxPrice);
+
+    List<ProductResponse> searchProducts2(String name);
 }

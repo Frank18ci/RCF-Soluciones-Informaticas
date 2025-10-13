@@ -103,4 +103,9 @@ public class ProductServiceImpl implements ProductService {
         }
         return products;
     }
+
+    @Override
+    public List<ProductResponse> searchProducts2(String name) {
+        return productMapper.toDtoList(productRepository.findByNameContaining(name));
+    }
 }

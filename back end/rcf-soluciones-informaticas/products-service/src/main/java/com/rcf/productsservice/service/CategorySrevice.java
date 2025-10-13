@@ -11,4 +11,6 @@ public interface CategorySrevice {
     CategoryResponse createCategory(CategoryRequest categoryRequest);
     CategoryResponse updateCategory(Long id, CategoryRequest categoryRequest);
     void deleteCategory(Long id);
+
+    List<CategoryResponse> searchCategoriesByName(String name);
 }

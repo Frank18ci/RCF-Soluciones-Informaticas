@@ -72,4 +72,14 @@ export class CategoriasPage implements OnInit, AfterViewInit{
     });
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.buscarCategoriaPorNombre(filterValue.trim().toLowerCase());
+  }
+  buscarCategoriaPorNombre(name: string) {
+    this.categoryService.getCategoriesByName(name).subscribe(categories => {
+      this.dataSource.data = categories;
+    });
+  }
+
 }
