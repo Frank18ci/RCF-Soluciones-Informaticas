@@ -19,15 +19,12 @@ import Order from '../../../shared/model/Order';
 export class OrderDetail implements OnInit {
   order: Order;
   constructor(
-    private route: ActivatedRoute,
     public  dialogRef: MatDialogRef<OrderDetail>,
     @Inject(MAT_DIALOG_DATA) public data: Order,
   ){
     this.order = data;
   }
-  ngOnInit(): void {
-    const orderId = this.route.snapshot.paramMap.get('id');
-    
+  ngOnInit(): void { 
   }
   // Función para mostrar los montos en formato monetario
   formatCurrency(cents: number, code: string): string {

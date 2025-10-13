@@ -10,29 +10,31 @@
       </h2>
       <p class="text-gray-500">Información general de la compra realizada</p>
     </div>
-
-    <mat-divider class="my-3"></mat-divider>
-
+    <div class="my-2">
+    </div>
+    <mat-divider></mat-divider>
+    <div class="my-2">
+    </div>
     <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
-      <div>
+      <div class="space-y-2">
         <p><strong>ID Usuario:</strong> {{ order.userId }}</p>
         <p><strong>Estado:</strong> 
           <span
             class="px-2 py-1 rounded-md text-sm font-semibold"
             [ngClass]="{
-              'bg-green-100 text-green-700': order.orderStatus?.code === 'COMPLETADO',
-              'bg-yellow-100 text-yellow-700': order.orderStatus?.code === 'PENDIENTE',
-              'bg-red-100 text-red-700': order.orderStatus?.code === 'CANCELADO'
+              'bg-green-100 text-green-700': order.orderStatus.code === 'COMPLETADO',
+              'bg-yellow-100 text-yellow-700': order.orderStatus.code === 'PENDIENTE',
+              'bg-red-100 text-red-700': order.orderStatus.code === 'CANCELADO'
             }"
           >
-            {{ order.orderStatus?.code || 'Desconocido' }}
+            {{ order.orderStatus.code || 'Desconocido' }}
           </span>
         </p>
         <p><strong>Método de Pago:</strong> {{ order.paymentMethodCode }}</p>
         <p><strong>Moneda:</strong> {{ order.currencyCode }}</p>
       </div>
 
-      <div>
+      <div class="space-y-2">
         <p><strong>Subtotal:</strong> {{ formatCurrency(order.subtotalCents, order.currencyCode) }}</p>
         <p><strong>Impuesto:</strong> {{ formatCurrency(order.taxTotalCents, order.currencyCode) }}</p>
         <p><strong>Descuento:</strong> {{ formatCurrency(order.discountCents, order.currencyCode) }}</p>
@@ -41,10 +43,12 @@
         </p>
       </div>
     </div>
-
-    <mat-divider class="my-4"></mat-divider>
-
-    <div>
+    <div class="my-2">
+    </div>
+    <mat-divider></mat-divider>
+    <div class="my-2">
+    </div>
+    <div class="space-y-2">
       <p><strong>Notas:</strong></p>
       <p class="text-gray-700 italic">{{ order.notes || 'Sin notas adicionales.' }}</p>
     </div>

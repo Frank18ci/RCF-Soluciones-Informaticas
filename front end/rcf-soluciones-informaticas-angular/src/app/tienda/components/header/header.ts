@@ -8,6 +8,7 @@ import { BehaviorSubject, fromEvent, map, Observable, startWith, Subscription, t
 import { AsyncPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { CarritoService } from '../../services/carrito-service';
 
 @Component({
   selector: 'app-header',
@@ -18,8 +19,13 @@ import { MatMenuModule } from '@angular/material/menu';
 export class Header implements OnInit, OnDestroy {
    showTopbar!: Observable<boolean>;
    scrollSub!: Subscription;
+   storageSub!: Subscription;
   @Output() openCart = new EventEmitter<void>();
 
+  constructor(
+    private carritoService: CarritoService
+  ) {}
+  
 
   ngOnInit() {
     this.showTopbar = fromEvent(window, 'scroll').pipe(
@@ -27,9 +33,19 @@ export class Header implements OnInit, OnDestroy {
       map(() => window.scrollY < 100),
       startWith(true) 
     );
+
+    this.storageSub = fromEvent<StorageEvent>(window, 'storage').subscribe(() => this.updateCartCount());
+    this.updateCartCount();
+  
+  }
+  updateCartCount() {
+    const cart = this.carritoService.getCart();
+    console.log('Cart updated from storage event:', cart);
+    this.cartCount = cart?.length || 0;
   }
   ngOnDestroy() {
-        this.scrollSub?.unsubscribe();
+    this.scrollSub?.unsubscribe();
+    this.storageSub?.unsubscribe();
   }
 
   isMenuOpen = false;

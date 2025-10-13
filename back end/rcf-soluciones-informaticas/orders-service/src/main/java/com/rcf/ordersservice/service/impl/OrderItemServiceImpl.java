@@ -4,6 +4,7 @@ import com.rcf.ordersservice.client.ProductClient;
 import com.rcf.ordersservice.client.ServiceClient;
 import com.rcf.ordersservice.dto.OrderItemRequest;
 import com.rcf.ordersservice.dto.OrderItemResponse;
+import com.rcf.ordersservice.exception.BadRequest;
 import com.rcf.ordersservice.exception.ResourceNotFound;
 import com.rcf.ordersservice.model.OrderItem;
 import com.rcf.ordersservice.repository.OrderItemRepository;
@@ -37,9 +38,21 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public OrderItemResponse createOrderItem(OrderItemRequest orderItemRequest) {
-        serviceClient.getServiceById(orderItemRequest.orderId());
+        OrderItem orderItem = orderItemMapper.toEntity(orderItemRequest);
+        if(orderItemRequest.serviceId() != null ){
+            if(orderItemRequest.serviceId() > 0){
+                serviceClient.getServiceById(orderItemRequest.serviceId());
+            } else {
+                orderItem.setServiceId(null);
+            }
+        } else {
+            orderItem.setServiceId(null);
+        }
+
+
+
         productClient.getProductById(orderItemRequest.productId());
-        return orderItemMapper.toDto(orderItemRepository.save(orderItemMapper.toEntity(orderItemRequest)));
+        return orderItemMapper.toDto(orderItemRepository.save(orderItem));
     }
 
     @Override
@@ -47,12 +60,22 @@ public class OrderItemServiceImpl implements OrderItemService {
         OrderItem orderItemFound = orderItemRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFound("Order item not found with id: " + id)
         );
+        if(orderItemRequest.serviceId() != null ){
+            if(orderItemRequest.serviceId() > 0){
+                serviceClient.getServiceById(orderItemRequest.serviceId());
+                orderItemFound.setServiceId(orderItemRequest.serviceId());
+            } else {
+                orderItemFound.setServiceId(null);
+            }
+        } else {
+            orderItemFound.setServiceId(null);
+        }
 
         serviceClient.getServiceById(orderItemRequest.orderId());
         productClient.getProductById(orderItemRequest.productId());
 
         orderItemFound.setOrder(orderItemMapper.toEntity(orderItemRequest).getOrder());
-        orderItemFound.setServiceId(orderItemRequest.serviceId());
+
         orderItemFound.setProductId(orderItemRequest.productId());
         orderItemFound.setQty(orderItemRequest.qty());
         orderItemFound.setUnitPriceCents(orderItemRequest.unitPriceCents());
