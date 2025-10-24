@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Frank18ci/Configuration-RCF-Soluciones-Informaticas
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        register: true
+server:
+  port: 8100

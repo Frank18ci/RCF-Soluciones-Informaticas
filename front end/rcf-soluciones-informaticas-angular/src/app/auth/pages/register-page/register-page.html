@@ -1,0 +1,42 @@
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <div class="text-center space-y-4">
+            <h1 class="text-5xl text-blue-800 font-bold ">RFC Soluciones Informaticas</h1>
+            <p class="text-slate-900  text-4xl font-black leading-tight tracking-[-0.033em]">Bienvenido</p>
+            <p class="text-slate-500 dark:text-slate-400 text-base">Registrate para tener mas beneficios</p>
+        </div>
+        <form [formGroup]="registerForm" class="space-y-5 mt-4">
+            
+            <div>
+                <label for="fullName" class="block text-gray-700 mb-1">Nombres Completos:</label>
+                <input id="fullName" formControlName="fullName" type="text"
+                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    autocomplete="name" />
+            </div>
+            <div>
+                <label for="phone" class="block text-gray-700 mb-1">Telefono:</label>
+                <input id="phone" formControlName="phone" type="text"
+                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    autocomplete="tel" />
+            </div>
+            <div>
+                <label for="email" class="block text-gray-700 mb-1">Correo:</label>
+                <input id="email" formControlName="email" type="email"
+                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    autocomplete="email" />
+            </div>
+            <div>
+                <label for="password" class="block text-gray-700 mb-1">Contraseña:</label>
+                <input id="password" type="password" formControlName="password"
+                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    autocomplete="current-password" />
+            </div>
+            <button type="submit" [disabled]="registerForm.invalid"
+                class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:opacity-50">
+                Registrarse
+            </button>
+            <a routerLink="/auth/login" class="text-blue-600 hover:underline">¿Ya tienes una cuenta? Inicia sesión</a>
+
+        </form>
+    </div>
+</div>
