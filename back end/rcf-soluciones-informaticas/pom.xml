@@ -18,6 +18,8 @@
         <module>orders-service</module>
         <module>schedules-service</module>
         <module>gateway-service</module>
+        <module>security-service</module>
+        <module>config-service</module>
     </modules>
 
     <properties>
